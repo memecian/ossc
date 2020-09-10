@@ -17,7 +17,7 @@ on the PCB. No tar or rubber covering them up!
 Tasks ahead:
 - [ ] write a comprehensive Readme
   - [x] add technical details
-  - [x] explain differences between the OSSC and the already available calculators
+  - [x] explain differences between the OSSC and already available calculators
   - [ ] add flowcharts to explain what is going on inside the thing
   - [ ] add a "planned features" overview
 - [ ] add schematics
