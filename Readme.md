@@ -4,10 +4,27 @@
 I was unsatisfied with the unhackability of our school-issued calculators,
 so I decided to make my own. The OSSC.
 
+The OSSC will sport two Atmel chips : a Mega8A (as a **K**eypad **C**ontroller)
+connected to a Mega2561 (the **M**ain **P**rocessing **U**nit) via UART.
+Having two chips is important, as it enables me to pack more features into the
+final product.
+
+Unlike some calculators I've used previously, this one will be
+easy to hack into, due to the chips and their programming interfaces being exposed
+on the PCB. No tar or rubber covering them up!
+
+
 Tasks ahead:
 - [ ] write a comprehensive Readme
+  - [ ] add technical details
+  - [ ] explain differences between the OSSC and the already available calculators
+  - [ ] add flowcharts to explain what is going on inside the thing
+  - [ ] add a "planned features" overview
 - [ ] add schematics
 - [ ] make PCB's
-- [ ] write code for the keypad
-- [ ] write code for the Main Processing Unit
+- [ ] write code for the KC
+  - [ ] Fix ```lvalue required as left operand of assignment``` errors
+  - [ ] add UART functionality
+  - [ ] test circuit and code in Proteus
+- [ ] write code for the MPU
 - [ ] design case
