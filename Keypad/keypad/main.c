@@ -31,8 +31,10 @@
 #define COL3 PORTB4
 #define COL4 PORTC0
 #define COL5 PORTC1
+//	Yes, it looks confusing and random, but it will make sense on the PCB later. Trust me.
 
-byte dataToMPU[6] = {0};
+byte dataToMPU[6] = {0}; //This array holds the button data, which will be sent to the MPU later.
+
 	
 void getButtons(int colNum)
 {
@@ -70,6 +72,7 @@ void getButtons(int colNum)
 		{
 			dataToMPU[colNum] |= (1<<7);
 		}
+		// Is it pretty? No. Does it work? Yes.
 	}
 	
 	switch (colNum)
@@ -106,14 +109,13 @@ void getButtons(int colNum)
 		break;
 	}
 }
-
+//FIXME: For some reason, the names I've defined don't work here. Why?
 int main(void)
 {
-/*	Yes, it looks confusing and random, but it will make sense on the PCB later. Trust me.
 
-	Setting the Data Direction Registers (DDRx)
-	0 - Input, 1 - Output
-*/
+
+/*	Setting the Data Direction Registers (DDRx)
+	0 - Input, 1 - Output					*/
 	
 	DDRB = 0b00011110;
 	DDRC = 0b00000011;
