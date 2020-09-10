@@ -1,5 +1,5 @@
-#Open Source Scientific Calculator
-##An open-source alternative to standard school calculators
+# Open Source Scientific Calculator
+## An open-source alternative to standard school calculators
 
 I was unsatisfied with the unhackability of our school-issued calculators,
 so I decided to make my own. The OSSC.
