@@ -1,4 +1,4 @@
-# Open Source Scientific Calculator
+# **O**pen **S**ource **S**cientific **C**alculator
 ## An open-source alternative to standard school calculators
 
 I was unsatisfied with the unhackability of our school-issued calculators,
@@ -9,7 +9,7 @@ connected to an ATmega2561 (the **M**ain **P**rocessing **U**nit) via UART.
 Having two chips is important, as it enables me to pack more features into the
 final product.
 
-The contraption (in the way that I'm envisioning it) will be powered by either 
+The contraption (in the way that I'm envisioning it) will be powered by either
 3 AAA batteries at 1.5V each or 4.5V total, or one Lithium Polymer cell at 3.7V,
 both of these satisfy the voltage requirements of both controllers (2.7V-5.5V).
 

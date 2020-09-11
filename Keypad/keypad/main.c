@@ -14,7 +14,7 @@
 
 // Redefining pin numbers to make code more readable
 
-// ROWS
+//ROWS
 #define ROW0 PIND3
 #define ROW1 PIND4
 #define ROW2 PINB6
