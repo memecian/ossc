@@ -25,12 +25,12 @@
 #define ROW7 PINB0
 
 // COLUMNS
-#define COL0 PORTB1 
-#define COL1 PORTB2
-#define COL2 PORTB3
-#define COL3 PORTB4
-#define COL4 PORTC0
-#define COL5 PORTC1
+#define COL0 //PORTB1
+#define COL1 //PORTB2
+#define COL2 //PORTB3
+#define COL3 //PORTB4
+#define COL4 //PORTC0
+#define COL5 //PORTC1
 //	Yes, it looks confusing and random, but it will make sense on the PCB later. Trust me.
 
 byte dataToMPU[6] = {0}; //This array holds the button data, which will be sent to the MPU later.
