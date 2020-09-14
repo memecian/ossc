@@ -8,111 +8,99 @@
  */ 
 
 #include <avr/io.h>
-//#include <>
 
 #define byte uint8_t
 
-// Redefining pin numbers to make code more readable
+/*Rows and columns designated pins
+ROW0 PIND3
+ROW1 PIND4
+ROW2 PINB6
+ROW3 PINB7
+ROW4 PIND5
+ROW5 PIND6
+ROW6 PIND7
+ROW7 PINB0
 
-//ROWS
-#define ROW0 PIND3
-#define ROW1 PIND4
-#define ROW2 PINB6
-#define ROW3 PINB7
-#define ROW4 PIND5
-#define ROW5 PIND6
-#define ROW6 PIND7
-#define ROW7 PINB0
+COL0 PORTB1
+COL1 PORTB2
+COL2 PORTB3
+COL3 PORTB4
+COL4 PORTC0
+COL5 PORTC1
 
-// COLUMNS
-#define COL0 //PORTB1
-#define COL1 //PORTB2
-#define COL2 //PORTB3
-#define COL3 //PORTB4
-#define COL4 //PORTC0
-#define COL5 //PORTC1
-//	Yes, it looks confusing and random, but it will make sense on the PCB later. Trust me.
-
+Yes, it looks confusing and random, but it will make sense on the PCB later. Trust me.
+*/
 byte dataToMPU[6] = {0}; //This array holds the button data, which will be sent to the MPU later.
 
-	
 void getButtons(int colNum)
 {
-	void getRows(void)
+	void getRowData(void)
 	{
-		if (ROW0 == 1)
+		//row-wise logging of data
+		if (PIND |= (1 << 3)) //ROW0
 		{
 			dataToMPU[colNum] |= (1<<0);
 		}
-		if (ROW1 == 1)
+		if (PIND |= (1 << 4)) //ROW1
 		{
 			dataToMPU[colNum] |= (1<<1);
 		}
-		if (ROW2 == 1)
+		if (PINB |= (1 << 6)) //ROW2
 		{
 			dataToMPU[colNum] |= (1<<2);
 		}
-		if (ROW3 == 1)
+		if (PINB |= (1 << 7)) //ROW3
 		{
 			dataToMPU[colNum] |= (1<<3);
 		}
-		if (ROW4 == 1)
+		if (PIND |= (1 << 5)) //ROW4
 		{
 			dataToMPU[colNum] |= (1<<4);
 		}
-		if (ROW5 == 1)
+		if (PIND |= (1 << 6)) //ROW5
 		{
 			dataToMPU[colNum] |= (1<<5);
 		}
-		if (ROW6 == 1)
+		if (PIND |= (1 << 7)) //ROW6
 		{
 			dataToMPU[colNum] |= (1<<6);
 		}
-		if (ROW7 == 1)
+		if (PINB |= (1 << 0)) //ROW7
 		{
-			dataToMPU[colNum] |= (1<<7);
-		}
-		// Is it pretty? No. Does it work? Yes.
+			dataToMPU[colNum] |= (1<<0);
+		}	
 	}
-	
 	switch (colNum)
 	{
-	case 0 :
-		COL0 = 1;
-		getRows();
-		COL0 = 0;
-		break;
-	case 1 :
-		COL1 = 1;
-		getRows();
-		COL1 = 0;	
-		break;
-	case 2 :
-		COL2 = 1;
-		getRows();
-		COL2 = 0;
-		break;	
-	case 3 :
-		COL3 = 1;
-		getRows();
-		COL3 = 0;
-		break;
-	case 4 :
-		COL4 = 1;
-		getRows();
-		COL4 = 0;
-		break;
-	case 5 :
-		COL5 = 1;
-		getRows();
-		COL5 = 0;
-		break;
+		case 0:
+			PORTB |= (1<<0);
+			getRowData();
+			PORTB |= (0<<0);
+		case 1:
+			PORTB |= (1<<2);
+			getRowData();
+			PORTB |= (0<<2);
+		case 2:
+			PORTB |= (1<<3);
+			getRowData();
+			PORTB |= (0<<3);
+		case 3:
+			PORTB |= (1<<4);
+			getRowData();
+			PORTB |= (0<<4);
+		case 4:
+			PORTC |= (1<<0);
+			getRowData();
+			PORTC |= (0<<0);
+		case 5:
+			PORTC |= (1<<1);
+			getRowData();
+			PORTC |= (0<<1);
 	}
 }
-//FIXME: For some reason, the names I've defined don't work here. Why?
+
 int main(void)
 {
-
 
 /*	Setting the Data Direction Registers (DDRx)
 	0 - Input, 1 - Output					*/
@@ -123,14 +111,14 @@ int main(void)
 	
     while (1) 
     {
-		for (int i; i < 6; i++)
+		for (int i = 0; i < 6; i++)
 		{
 			getButtons(i);
 		}
 		
 		//FIXME: USART GOES HERE
 		
-		for (int i; i < 6; i++)
+		for (int i = 0; i < 6; i++)
 		{
 			dataToMPU[i] = 0;
 		}
