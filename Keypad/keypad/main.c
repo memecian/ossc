@@ -8,6 +8,7 @@
  */ 
 
 #include <avr/io.h>
+#include <uart_pf/uart.h>
 
 #define byte uint8_t
 
@@ -30,7 +31,7 @@ COL5 PORTC1
 
 Yes, it looks confusing and random, but it will make sense on the PCB later. Trust me.
 */
-byte dataToMPU[6] = {0}; //This array holds the button data, which will be sent to the MPU later.
+unsigned char dataToMPU[6] = {0}; //This array holds the button data, which will be sent to the MPU later.
 
 void getButtons(int colNum)
 {
@@ -67,7 +68,7 @@ void getButtons(int colNum)
 		}
 		if (PINB |= (1 << 0)) //ROW7
 		{
-			dataToMPU[colNum] |= (1<<0);
+			dataToMPU[colNum] |= (1<<8);
 		}	
 	}
 	switch (colNum)
@@ -101,6 +102,7 @@ void getButtons(int colNum)
 
 int main(void)
 {
+	uart_init(9600);
 
 /*	Setting the Data Direction Registers (DDRx)
 	0 - Input, 1 - Output					*/
@@ -116,7 +118,10 @@ int main(void)
 			getButtons(i);
 		}
 		
-		//FIXME: USART GOES HERE
+		for (int i = 0; i < 6; i++)
+		{
+			uart_putc(dataToMPU[i]);
+		}
 		
 		for (int i = 0; i < 6; i++)
 		{
