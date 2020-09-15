@@ -8,7 +8,8 @@
  */ 
 
 #include <avr/io.h>
-#include <uart_pf/uart.h>
+#include "uart_pf/uart.h"
+#include "uart_pf/uart.c"
 
 #define byte uint8_t
 
@@ -32,6 +33,7 @@ COL5 PORTC1
 Yes, it looks confusing and random, but it will make sense on the PCB later. Trust me.
 */
 unsigned char dataToMPU[6] = {0}; //This array holds the button data, which will be sent to the MPU later.
+unsigned char test = 'c';
 
 void getButtons(int colNum)
 {
@@ -120,7 +122,7 @@ int main(void)
 		
 		for (int i = 0; i < 6; i++)
 		{
-			uart_putc(dataToMPU[i]);
+			uart_putc(/*dataToMPU[i]*/97);
 		}
 		
 		for (int i = 0; i < 6; i++)
