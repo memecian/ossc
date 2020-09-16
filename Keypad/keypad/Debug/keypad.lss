@@ -3,31 +3,31 @@ keypad.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000002c0  00000000  00000000  00000074  2**1
+  0 .text         00000292  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000000  00800060  00800060  00000334  2**0
+  1 .data         00000000  00800060  00800060  00000306  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          0000004b  00800060  00800060  00000334  2**0
+  2 .bss          0000004b  00800060  00800060  00000306  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00000334  2**0
+  3 .comment      00000030  00000000  00000000  00000306  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000364  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000338  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000068  00000000  00000000  000003a0  2**0
+  5 .debug_aranges 00000068  00000000  00000000  00000374  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   0000098d  00000000  00000000  00000408  2**0
+  6 .debug_info   00000969  00000000  00000000  000003dc  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000006b4  00000000  00000000  00000d95  2**0
+  7 .debug_abbrev 000006b4  00000000  00000000  00000d45  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000556  00000000  00000000  00001449  2**0
+  8 .debug_line   00000526  00000000  00000000  000013f9  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000128  00000000  00000000  000019a0  2**2
+  9 .debug_frame  00000120  00000000  00000000  00001920  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000003d9  00000000  00000000  00001ac8  2**0
+ 10 .debug_str    000003d9  00000000  00000000  00001a40  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000486  00000000  00000000  00001ea1  2**0
+ 11 .debug_loc    0000046c  00000000  00000000  00001e19  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000000a0  00000000  00000000  00002327  2**0
+ 12 .debug_ranges 000000a0  00000000  00000000  00002285  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -65,7 +65,7 @@ Disassembly of section .text:
   32:	10 e0       	ldi	r17, 0x00	; 0
   34:	a0 e6       	ldi	r26, 0x60	; 96
   36:	b0 e0       	ldi	r27, 0x00	; 0
-  38:	e0 ec       	ldi	r30, 0xC0	; 192
+  38:	e2 e9       	ldi	r30, 0x92	; 146
   3a:	f2 e0       	ldi	r31, 0x02	; 2
   3c:	02 c0       	rjmp	.+4      	; 0x42 <__SREG__+0x3>
   3e:	05 90       	lpm	r0, Z+
@@ -87,8 +87,8 @@ Disassembly of section .text:
   52:	ab 3a       	cpi	r26, 0xAB	; 171
   54:	b2 07       	cpc	r27, r18
   56:	e1 f7       	brne	.-8      	; 0x50 <.do_clear_bss_loop>
-  58:	f1 d0       	rcall	.+482    	; 0x23c <main>
-  5a:	30 c1       	rjmp	.+608    	; 0x2bc <_exit>
+  58:	da d0       	rcall	.+436    	; 0x20e <main>
+  5a:	19 c1       	rjmp	.+562    	; 0x28e <_exit>
 
 0000005c <__bad_interrupt>:
   5c:	d1 cf       	rjmp	.-94     	; 0x0 <__vectors>
@@ -250,294 +250,291 @@ void getButtons(int colNum)
 {
  180:	2f 92       	push	r2
  182:	3f 92       	push	r3
- 184:	0f 93       	push	r16
- 186:	1f 93       	push	r17
- 188:	cf 93       	push	r28
- 18a:	df 93       	push	r29
- 18c:	00 d0       	rcall	.+0      	; 0x18e <getButtons+0xe>
- 18e:	cd b7       	in	r28, 0x3d	; 61
- 190:	de b7       	in	r29, 0x3e	; 62
+ 184:	cf 93       	push	r28
+ 186:	df 93       	push	r29
+ 188:	00 d0       	rcall	.+0      	; 0x18a <getButtons+0xa>
+ 18a:	cd b7       	in	r28, 0x3d	; 61
+ 18c:	de b7       	in	r29, 0x3e	; 62
 Yes, it looks confusing and random, but it will make sense on the PCB later. Trust me.
 */
 unsigned char dataToMPU[6] = {0}; //This array holds the button data, which will be sent to the MPU later.
 unsigned char test = 'c';
 
 void getButtons(int colNum)
- 192:	9a 83       	std	Y+2, r25	; 0x02
- 194:	89 83       	std	Y+1, r24	; 0x01
+ 18e:	9a 83       	std	Y+2, r25	; 0x02
+ 190:	89 83       	std	Y+1, r24	; 0x01
 		if (PINB |= (1 << 0)) //ROW7
 		{
 			dataToMPU[colNum] |= (1<<8);
 		}	
 	}
 	switch (colNum)
- 196:	82 30       	cpi	r24, 0x02	; 2
- 198:	91 05       	cpc	r25, r1
- 19a:	09 f4       	brne	.+2      	; 0x19e <getButtons+0x1e>
- 19c:	47 c0       	rjmp	.+142    	; 0x22c <getButtons+0xac>
- 19e:	c4 f0       	brlt	.+48     	; 0x1d0 <getButtons+0x50>
- 1a0:	84 30       	cpi	r24, 0x04	; 4
- 1a2:	91 05       	cpc	r25, r1
- 1a4:	b1 f1       	breq	.+108    	; 0x212 <getButtons+0x92>
- 1a6:	0c f4       	brge	.+2      	; 0x1aa <getButtons+0x2a>
- 1a8:	45 c0       	rjmp	.+138    	; 0x234 <getButtons+0xb4>
- 1aa:	05 97       	sbiw	r24, 0x05	; 5
- 1ac:	41 f4       	brne	.+16     	; 0x1be <getButtons+0x3e>
- 1ae:	8e 01       	movw	r16, r28
- 1b0:	0f 5f       	subi	r16, 0xFF	; 255
- 1b2:	1f 4f       	sbci	r17, 0xFF	; 255
-		case 4:
+ 192:	82 30       	cpi	r24, 0x02	; 2
+ 194:	91 05       	cpc	r25, r1
+ 196:	c9 f1       	breq	.+114    	; 0x20a <getButtons+0x8a>
+ 198:	a4 f0       	brlt	.+40     	; 0x1c2 <getButtons+0x42>
+ 19a:	84 30       	cpi	r24, 0x04	; 4
+ 19c:	91 05       	cpc	r25, r1
+ 19e:	19 f1       	breq	.+70     	; 0x1e6 <getButtons+0x66>
+ 1a0:	94 f1       	brlt	.+100    	; 0x206 <getButtons+0x86>
+ 1a2:	05 97       	sbiw	r24, 0x05	; 5
+ 1a4:	39 f4       	brne	.+14     	; 0x1b4 <getButtons+0x34>
 			PORTC |= (1<<0);
 			getRowData();
 			PORTC |= (0<<0);
+			break;
 		case 5:
 			PORTC |= (1<<1);
- 1b4:	a9 9a       	sbi	0x15, 1	; 21
+ 1a6:	a9 9a       	sbi	0x15, 1	; 21
 			getRowData();
- 1b6:	18 01       	movw	r2, r16
- 1b8:	52 df       	rcall	.-348    	; 0x5e <getRowData.1839>
+ 1a8:	ce 01       	movw	r24, r28
+ 1aa:	01 96       	adiw	r24, 0x01	; 1
+ 1ac:	1c 01       	movw	r2, r24
+ 1ae:	57 df       	rcall	.-338    	; 0x5e <getRowData.1839>
 			PORTC |= (0<<1);
- 1ba:	85 b3       	in	r24, 0x15	; 21
- 1bc:	85 bb       	out	0x15, r24	; 21
+ 1b0:	85 b3       	in	r24, 0x15	; 21
+ 1b2:	85 bb       	out	0x15, r24	; 21
+			break;
 	}
 }
- 1be:	0f 90       	pop	r0
- 1c0:	0f 90       	pop	r0
- 1c2:	df 91       	pop	r29
- 1c4:	cf 91       	pop	r28
- 1c6:	1f 91       	pop	r17
- 1c8:	0f 91       	pop	r16
- 1ca:	3f 90       	pop	r3
- 1cc:	2f 90       	pop	r2
- 1ce:	08 95       	ret
+ 1b4:	0f 90       	pop	r0
+ 1b6:	0f 90       	pop	r0
+ 1b8:	df 91       	pop	r29
+ 1ba:	cf 91       	pop	r28
+ 1bc:	3f 90       	pop	r3
+ 1be:	2f 90       	pop	r2
+ 1c0:	08 95       	ret
 		if (PINB |= (1 << 0)) //ROW7
 		{
 			dataToMPU[colNum] |= (1<<8);
 		}	
 	}
 	switch (colNum)
- 1d0:	00 97       	sbiw	r24, 0x00	; 0
- 1d2:	19 f1       	breq	.+70     	; 0x21a <getButtons+0x9a>
- 1d4:	01 97       	sbiw	r24, 0x01	; 1
- 1d6:	99 f7       	brne	.-26     	; 0x1be <getButtons+0x3e>
- 1d8:	8e 01       	movw	r16, r28
- 1da:	0f 5f       	subi	r16, 0xFF	; 255
- 1dc:	1f 4f       	sbci	r17, 0xFF	; 255
-		case 0:
+ 1c2:	00 97       	sbiw	r24, 0x00	; 0
+ 1c4:	f1 f0       	breq	.+60     	; 0x202 <getButtons+0x82>
+ 1c6:	01 97       	sbiw	r24, 0x01	; 1
+ 1c8:	a9 f7       	brne	.-22     	; 0x1b4 <getButtons+0x34>
 			PORTB |= (1<<0);
 			getRowData();
 			PORTB |= (0<<0);
+			break;
 		case 1:
 			PORTB |= (1<<2);
- 1de:	c2 9a       	sbi	0x18, 2	; 24
+ 1ca:	c2 9a       	sbi	0x18, 2	; 24
 			getRowData();
- 1e0:	18 01       	movw	r2, r16
- 1e2:	3d df       	rcall	.-390    	; 0x5e <getRowData.1839>
-			PORTB |= (0<<2);
- 1e4:	88 b3       	in	r24, 0x18	; 24
- 1e6:	88 bb       	out	0x18, r24	; 24
-		case 2:
-			PORTB |= (1<<3);
- 1e8:	c3 9a       	sbi	0x18, 3	; 24
-			getRowData();
- 1ea:	18 01       	movw	r2, r16
- 1ec:	38 df       	rcall	.-400    	; 0x5e <getRowData.1839>
 			PORTB |= (0<<3);
- 1ee:	88 b3       	in	r24, 0x18	; 24
- 1f0:	88 bb       	out	0x18, r24	; 24
+			break;
 		case 3:
 			PORTB |= (1<<4);
- 1f2:	c4 9a       	sbi	0x18, 4	; 24
 			getRowData();
- 1f4:	18 01       	movw	r2, r16
- 1f6:	33 df       	rcall	.-410    	; 0x5e <getRowData.1839>
+ 1cc:	ce 01       	movw	r24, r28
+ 1ce:	01 96       	adiw	r24, 0x01	; 1
+ 1d0:	1c 01       	movw	r2, r24
+ 1d2:	45 df       	rcall	.-374    	; 0x5e <getRowData.1839>
 			PORTB |= (0<<4);
- 1f8:	88 b3       	in	r24, 0x18	; 24
- 1fa:	88 bb       	out	0x18, r24	; 24
-		case 4:
-			PORTC |= (1<<0);
- 1fc:	a8 9a       	sbi	0x15, 0	; 21
-			getRowData();
- 1fe:	18 01       	movw	r2, r16
- 200:	2e df       	rcall	.-420    	; 0x5e <getRowData.1839>
-			PORTC |= (0<<0);
- 202:	85 b3       	in	r24, 0x15	; 21
- 204:	85 bb       	out	0x15, r24	; 21
-		case 5:
+ 1d4:	88 b3       	in	r24, 0x18	; 24
+ 1d6:	88 bb       	out	0x18, r24	; 24
 			PORTC |= (1<<1);
- 206:	a9 9a       	sbi	0x15, 1	; 21
 			getRowData();
- 208:	18 01       	movw	r2, r16
- 20a:	29 df       	rcall	.-430    	; 0x5e <getRowData.1839>
 			PORTC |= (0<<1);
- 20c:	85 b3       	in	r24, 0x15	; 21
- 20e:	85 bb       	out	0x15, r24	; 21
+			break;
 	}
 }
- 210:	d6 cf       	rjmp	.-84     	; 0x1be <getButtons+0x3e>
- 212:	8e 01       	movw	r16, r28
- 214:	0f 5f       	subi	r16, 0xFF	; 255
- 216:	1f 4f       	sbci	r17, 0xFF	; 255
- 218:	f1 cf       	rjmp	.-30     	; 0x1fc <getButtons+0x7c>
+ 1d8:	0f 90       	pop	r0
+ 1da:	0f 90       	pop	r0
+ 1dc:	df 91       	pop	r29
+ 1de:	cf 91       	pop	r28
+ 1e0:	3f 90       	pop	r3
+ 1e2:	2f 90       	pop	r2
+ 1e4:	08 95       	ret
+			PORTB |= (1<<4);
+			getRowData();
+			PORTB |= (0<<4);
+			break;
+		case 4:
+			PORTC |= (1<<0);
+ 1e6:	a8 9a       	sbi	0x15, 0	; 21
+			getRowData();
+			PORTC |= (0<<0);
+			break;
+		case 5:
+			PORTC |= (1<<1);
+			getRowData();
+ 1e8:	ce 01       	movw	r24, r28
+ 1ea:	01 96       	adiw	r24, 0x01	; 1
+ 1ec:	1c 01       	movw	r2, r24
+ 1ee:	37 df       	rcall	.-402    	; 0x5e <getRowData.1839>
+			PORTC |= (0<<1);
+ 1f0:	85 b3       	in	r24, 0x15	; 21
+ 1f2:	85 bb       	out	0x15, r24	; 21
+			break;
+	}
+}
+ 1f4:	0f 90       	pop	r0
+ 1f6:	0f 90       	pop	r0
+ 1f8:	df 91       	pop	r29
+ 1fa:	cf 91       	pop	r28
+ 1fc:	3f 90       	pop	r3
+ 1fe:	2f 90       	pop	r2
+ 200:	08 95       	ret
 		}	
 	}
 	switch (colNum)
 	{
 		case 0:
 			PORTB |= (1<<0);
- 21a:	c0 9a       	sbi	0x18, 0	; 24
+ 202:	c0 9a       	sbi	0x18, 0	; 24
+ 204:	e3 cf       	rjmp	.-58     	; 0x1cc <getButtons+0x4c>
+			PORTB |= (1<<3);
 			getRowData();
- 21c:	8e 01       	movw	r16, r28
- 21e:	0f 5f       	subi	r16, 0xFF	; 255
- 220:	1f 4f       	sbci	r17, 0xFF	; 255
- 222:	18 01       	movw	r2, r16
- 224:	1c df       	rcall	.-456    	; 0x5e <getRowData.1839>
-			PORTB |= (0<<0);
- 226:	88 b3       	in	r24, 0x18	; 24
- 228:	88 bb       	out	0x18, r24	; 24
- 22a:	d9 cf       	rjmp	.-78     	; 0x1de <getButtons+0x5e>
- 22c:	8e 01       	movw	r16, r28
- 22e:	0f 5f       	subi	r16, 0xFF	; 255
- 230:	1f 4f       	sbci	r17, 0xFF	; 255
- 232:	da cf       	rjmp	.-76     	; 0x1e8 <getButtons+0x68>
- 234:	8e 01       	movw	r16, r28
- 236:	0f 5f       	subi	r16, 0xFF	; 255
- 238:	1f 4f       	sbci	r17, 0xFF	; 255
- 23a:	db cf       	rjmp	.-74     	; 0x1f2 <getButtons+0x72>
+			PORTB |= (0<<3);
+			break;
+		case 3:
+			PORTB |= (1<<4);
+ 206:	c4 9a       	sbi	0x18, 4	; 24
+ 208:	e1 cf       	rjmp	.-62     	; 0x1cc <getButtons+0x4c>
+			PORTB |= (1<<2);
+			getRowData();
+			PORTB |= (0<<2);
+			break;
+		case 2:
+			PORTB |= (1<<3);
+ 20a:	c3 9a       	sbi	0x18, 3	; 24
+ 20c:	df cf       	rjmp	.-66     	; 0x1cc <getButtons+0x4c>
 
-0000023c <main>:
+0000020e <main>:
 Input:    baudrate using macro UART_BAUD_SELECT()
 Returns:  none
 **************************************************************************/
 void uart_init(unsigned int baudrate)
 {
     UART_TxHead = 0;
- 23c:	10 92 6a 00 	sts	0x006A, r1	; 0x80006a <UART_TxHead>
+ 20e:	10 92 6a 00 	sts	0x006A, r1	; 0x80006a <UART_TxHead>
     UART_TxTail = 0;
- 240:	10 92 69 00 	sts	0x0069, r1	; 0x800069 <UART_TxTail>
+ 212:	10 92 69 00 	sts	0x0069, r1	; 0x800069 <UART_TxTail>
     UART_RxHead = 0;
- 244:	10 92 68 00 	sts	0x0068, r1	; 0x800068 <UART_RxHead>
+ 216:	10 92 68 00 	sts	0x0068, r1	; 0x800068 <UART_RxHead>
     UART_RxTail = 0;
- 248:	10 92 67 00 	sts	0x0067, r1	; 0x800067 <UART_RxTail>
+ 21a:	10 92 67 00 	sts	0x0067, r1	; 0x800067 <UART_RxTail>
         #if UART0_BIT_U2X
         UART0_STATUS = (1<<UART0_BIT_U2X);  //Enable 2x speed 
         #endif
     } 
     #if defined(UART0_UBRRH)
     UART0_UBRRH = (unsigned char)((baudrate>>8)&0x80) ;
- 24c:	10 bc       	out	0x20, r1	; 32
+ 21e:	10 bc       	out	0x20, r1	; 32
     #endif    
     UART0_UBRRL = (unsigned char) (baudrate&0x00FF);
- 24e:	80 e8       	ldi	r24, 0x80	; 128
- 250:	89 b9       	out	0x09, r24	; 9
+ 220:	80 e8       	ldi	r24, 0x80	; 128
+ 222:	89 b9       	out	0x09, r24	; 9
       
     /* Enable USART receiver and transmitter and receive complete interrupt */
     UART0_CONTROL = _BV(UART0_BIT_RXCIE)|(1<<UART0_BIT_RXEN)|(1<<UART0_BIT_TXEN);
- 252:	88 e9       	ldi	r24, 0x98	; 152
- 254:	8a b9       	out	0x0a, r24	; 10
+ 224:	88 e9       	ldi	r24, 0x98	; 152
+ 226:	8a b9       	out	0x0a, r24	; 10
     
     /* Set frame format: asynchronous, 8data, no parity, 1stop bit */
     #ifdef UART0_CONTROLC
     #ifdef UART0_BIT_URSEL
     UART0_CONTROLC = (1<<UART0_BIT_URSEL)|(1<<UART0_BIT_UCSZ1)|(1<<UART0_BIT_UCSZ0);
- 256:	86 e8       	ldi	r24, 0x86	; 134
- 258:	80 bd       	out	0x20, r24	; 32
+ 228:	86 e8       	ldi	r24, 0x86	; 134
+ 22a:	80 bd       	out	0x20, r24	; 32
 	uart_init(9600);
 
 /*	Setting the Data Direction Registers (DDRx)
 	0 - Input, 1 - Output					*/
 	
 	DDRB = 0b00011110;
- 25a:	8e e1       	ldi	r24, 0x1E	; 30
- 25c:	87 bb       	out	0x17, r24	; 23
+ 22c:	8e e1       	ldi	r24, 0x1E	; 30
+ 22e:	87 bb       	out	0x17, r24	; 23
 	DDRC = 0b00000011;
- 25e:	83 e0       	ldi	r24, 0x03	; 3
- 260:	84 bb       	out	0x14, r24	; 20
+ 230:	83 e0       	ldi	r24, 0x03	; 3
+ 232:	84 bb       	out	0x14, r24	; 20
 	DDRD = 0b00000010;
- 262:	82 e0       	ldi	r24, 0x02	; 2
- 264:	81 bb       	out	0x11, r24	; 17
+ 234:	82 e0       	ldi	r24, 0x02	; 2
+ 236:	81 bb       	out	0x11, r24	; 17
     
     while ( tmphead == UART_TxTail ){
         ;/* wait for free space in buffer */
     }
     
     UART_TxBuf[tmphead] = data;
- 266:	11 e6       	ldi	r17, 0x61	; 97
+ 238:	11 e6       	ldi	r17, 0x61	; 97
 	
     while (1) 
     {
 		for (int i = 0; i < 6; i++)
- 268:	c0 e0       	ldi	r28, 0x00	; 0
- 26a:	d0 e0       	ldi	r29, 0x00	; 0
+ 23a:	c0 e0       	ldi	r28, 0x00	; 0
+ 23c:	d0 e0       	ldi	r29, 0x00	; 0
 		{
 			getButtons(i);
- 26c:	ce 01       	movw	r24, r28
- 26e:	88 df       	rcall	.-240    	; 0x180 <getButtons>
+ 23e:	ce 01       	movw	r24, r28
+ 240:	9f df       	rcall	.-194    	; 0x180 <getButtons>
 	DDRC = 0b00000011;
 	DDRD = 0b00000010;
 	
     while (1) 
     {
 		for (int i = 0; i < 6; i++)
- 270:	21 96       	adiw	r28, 0x01	; 1
- 272:	c6 30       	cpi	r28, 0x06	; 6
- 274:	d1 05       	cpc	r29, r1
- 276:	d1 f7       	brne	.-12     	; 0x26c <main+0x30>
- 278:	26 e0       	ldi	r18, 0x06	; 6
- 27a:	30 e0       	ldi	r19, 0x00	; 0
+ 242:	21 96       	adiw	r28, 0x01	; 1
+ 244:	c6 30       	cpi	r28, 0x06	; 6
+ 246:	d1 05       	cpc	r29, r1
+ 248:	d1 f7       	brne	.-12     	; 0x23e <main+0x30>
+ 24a:	26 e0       	ldi	r18, 0x06	; 6
+ 24c:	30 e0       	ldi	r19, 0x00	; 0
 void uart_putc(unsigned char data)
 {
     unsigned char tmphead;
 
     
     tmphead  = (UART_TxHead + 1) & UART_TX_BUFFER_MASK;
- 27c:	90 91 6a 00 	lds	r25, 0x006A	; 0x80006a <UART_TxHead>
- 280:	9f 5f       	subi	r25, 0xFF	; 255
- 282:	9f 71       	andi	r25, 0x1F	; 31
+ 24e:	90 91 6a 00 	lds	r25, 0x006A	; 0x80006a <UART_TxHead>
+ 252:	9f 5f       	subi	r25, 0xFF	; 255
+ 254:	9f 71       	andi	r25, 0x1F	; 31
     
     while ( tmphead == UART_TxTail ){
- 284:	80 91 69 00 	lds	r24, 0x0069	; 0x800069 <UART_TxTail>
- 288:	98 17       	cp	r25, r24
- 28a:	e1 f3       	breq	.-8      	; 0x284 <main+0x48>
+ 256:	80 91 69 00 	lds	r24, 0x0069	; 0x800069 <UART_TxTail>
+ 25a:	98 17       	cp	r25, r24
+ 25c:	e1 f3       	breq	.-8      	; 0x256 <main+0x48>
         ;/* wait for free space in buffer */
     }
     
     UART_TxBuf[tmphead] = data;
- 28c:	e9 2f       	mov	r30, r25
- 28e:	f0 e0       	ldi	r31, 0x00	; 0
- 290:	e5 57       	subi	r30, 0x75	; 117
- 292:	ff 4f       	sbci	r31, 0xFF	; 255
- 294:	10 83       	st	Z, r17
+ 25e:	e9 2f       	mov	r30, r25
+ 260:	f0 e0       	ldi	r31, 0x00	; 0
+ 262:	e5 57       	subi	r30, 0x75	; 117
+ 264:	ff 4f       	sbci	r31, 0xFF	; 255
+ 266:	10 83       	st	Z, r17
     UART_TxHead = tmphead;
- 296:	90 93 6a 00 	sts	0x006A, r25	; 0x80006a <UART_TxHead>
+ 268:	90 93 6a 00 	sts	0x006A, r25	; 0x80006a <UART_TxHead>
 
     /* enable UDRE interrupt */
     UART0_CONTROL    |= _BV(UART0_UDRIE);
- 29a:	55 9a       	sbi	0x0a, 5	; 10
- 29c:	21 50       	subi	r18, 0x01	; 1
- 29e:	31 09       	sbc	r19, r1
+ 26c:	55 9a       	sbi	0x0a, 5	; 10
+ 26e:	21 50       	subi	r18, 0x01	; 1
+ 270:	31 09       	sbc	r19, r1
 		{
 			getButtons(i);
 		}
 		
 		for (int i = 0; i < 6; i++)
- 2a0:	69 f7       	brne	.-38     	; 0x27c <main+0x40>
+ 272:	69 f7       	brne	.-38     	; 0x24e <main+0x40>
 			uart_putc(/*dataToMPU[i]*/97);
 		}
 		
 		for (int i = 0; i < 6; i++)
 		{
 			dataToMPU[i] = 0;
- 2a2:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__DATA_REGION_ORIGIN__>
- 2a6:	10 92 61 00 	sts	0x0061, r1	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
- 2aa:	10 92 62 00 	sts	0x0062, r1	; 0x800062 <__DATA_REGION_ORIGIN__+0x2>
- 2ae:	10 92 63 00 	sts	0x0063, r1	; 0x800063 <__DATA_REGION_ORIGIN__+0x3>
- 2b2:	10 92 64 00 	sts	0x0064, r1	; 0x800064 <__DATA_REGION_ORIGIN__+0x4>
- 2b6:	10 92 65 00 	sts	0x0065, r1	; 0x800065 <__DATA_REGION_ORIGIN__+0x5>
- 2ba:	d6 cf       	rjmp	.-84     	; 0x268 <main+0x2c>
+ 274:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 278:	10 92 61 00 	sts	0x0061, r1	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 27c:	10 92 62 00 	sts	0x0062, r1	; 0x800062 <__DATA_REGION_ORIGIN__+0x2>
+ 280:	10 92 63 00 	sts	0x0063, r1	; 0x800063 <__DATA_REGION_ORIGIN__+0x3>
+ 284:	10 92 64 00 	sts	0x0064, r1	; 0x800064 <__DATA_REGION_ORIGIN__+0x4>
+ 288:	10 92 65 00 	sts	0x0065, r1	; 0x800065 <__DATA_REGION_ORIGIN__+0x5>
+ 28c:	d6 cf       	rjmp	.-84     	; 0x23a <main+0x2c>
 
-000002bc <_exit>:
- 2bc:	f8 94       	cli
+0000028e <_exit>:
+ 28e:	f8 94       	cli
 
-000002be <__stop_program>:
- 2be:	ff cf       	rjmp	.-2      	; 0x2be <__stop_program>
+00000290 <__stop_program>:
+ 290:	ff cf       	rjmp	.-2      	; 0x290 <__stop_program>

@@ -79,26 +79,32 @@ void getButtons(int colNum)
 			PORTB |= (1<<0);
 			getRowData();
 			PORTB |= (0<<0);
+			break;
 		case 1:
 			PORTB |= (1<<2);
 			getRowData();
 			PORTB |= (0<<2);
+			break;
 		case 2:
 			PORTB |= (1<<3);
 			getRowData();
 			PORTB |= (0<<3);
+			break;
 		case 3:
 			PORTB |= (1<<4);
 			getRowData();
 			PORTB |= (0<<4);
+			break;
 		case 4:
 			PORTC |= (1<<0);
 			getRowData();
 			PORTC |= (0<<0);
+			break;
 		case 5:
 			PORTC |= (1<<1);
 			getRowData();
 			PORTC |= (0<<1);
+			break;
 	}
 }
 
