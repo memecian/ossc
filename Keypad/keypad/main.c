@@ -7,11 +7,18 @@
 	to the main processing unit (MPU) using USART. 
  */ 
 
+#ifndef F_CPU
+#define F_CPU 8000000UL
+#endif
+
+#define UART_BAUD_RATE 9600
+
+#define byte uint8_t
+
 #include <avr/io.h>
 #include "uart_pf/uart.h"
 #include "uart_pf/uart.c"
 
-#define byte uint8_t
 
 /*Rows and columns designated pins
 ROW0 PIND3
@@ -110,7 +117,7 @@ void getButtons(int colNum)
 
 int main(void)
 {
-	uart_init(9600);
+	uart_init( UART_BAUD_SELECT(UART_BAUD_RATE,F_CPU) ); 
 
 /*	Setting the Data Direction Registers (DDRx)
 	0 - Input, 1 - Output					*/
