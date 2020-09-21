@@ -7,11 +7,14 @@
 	to the main processing unit (MPU) using USART. 
  */ 
 
-#ifndef F_CPU
-#define F_CPU 8000000UL
-#endif
 
+#define F_CPU 8000000UL
 #define UART_BAUD_RATE 9600
+
+#define set_bit(var, bit) ((var) |= (1 << (bit)))
+#define clear_bit(var, bit) ((var) &= (unsigned)~(1 << (bit)))
+#define bit_is_set(var, bit) ((var) & (1 << (bit)))
+#define bit_is_clear(var, bit) !bit_is_set(var, bit)
 
 #define byte uint8_t
 
@@ -40,42 +43,41 @@ COL5 PORTC1
 Yes, it looks confusing and random, but it will make sense on the PCB later. Trust me.
 */
 unsigned char dataToMPU[6] = {0}; //This array holds the button data, which will be sent to the MPU later.
-unsigned char test = 'c';
 
 void getButtons(int colNum)
 {
 	void getRowData(void)
 	{
 		//row-wise logging of data
-		if (PIND |= (1 << 3)) //ROW0
+		if (bit_is_set(PIND, 3)) //ROW0
 		{
 			dataToMPU[colNum] |= (1<<0);
 		}
-		if (PIND |= (1 << 4)) //ROW1
+		if (bit_is_set(PIND, 4)) //ROW1
 		{
 			dataToMPU[colNum] |= (1<<1);
 		}
-		if (PINB |= (1 << 6)) //ROW2
+		if (bit_is_set(PINB, 6)) //ROW2
 		{
 			dataToMPU[colNum] |= (1<<2);
 		}
-		if (PINB |= (1 << 7)) //ROW3
+		if (bit_is_set(PINB, 7)) //ROW3
 		{
 			dataToMPU[colNum] |= (1<<3);
 		}
-		if (PIND |= (1 << 5)) //ROW4
+		if (bit_is_set(PIND, 5)) //ROW4
 		{
 			dataToMPU[colNum] |= (1<<4);
 		}
-		if (PIND |= (1 << 6)) //ROW5
+		if (bit_is_set(PIND, 6)) //ROW5
 		{
 			dataToMPU[colNum] |= (1<<5);
 		}
-		if (PIND |= (1 << 7)) //ROW6
+		if (bit_is_set(PIND, 7)) //ROW6
 		{
 			dataToMPU[colNum] |= (1<<6);
 		}
-		if (PINB |= (1 << 0)) //ROW7
+		if (bit_is_set(PINB, 0)) //ROW7
 		{
 			dataToMPU[colNum] |= (1<<8);
 		}	
@@ -83,34 +85,33 @@ void getButtons(int colNum)
 	switch (colNum)
 	{
 		case 0:
-			PORTB |= (1<<0);
+			set_bit(PORTB, 1);
 			getRowData();
-			PORTB |= (0<<0);
+			clear_bit(PORTB, 1);
 			break;
 		case 1:
-			PORTB |= (1<<2);
+			set_bit(PORTB, 2);
 			getRowData();
-			PORTB |= (0<<2);
+			clear_bit(PORTB, 2);
 			break;
 		case 2:
-			PORTB |= (1<<3);
+			set_bit(PORTB, 3);
 			getRowData();
-			PORTB |= (0<<3);
+			clear_bit(PORTB, 3);
 			break;
 		case 3:
-			PORTB |= (1<<4);
+			set_bit(PORTB, 4);
 			getRowData();
-			PORTB |= (0<<4);
-			break;
+			clear_bit(PORTB, 4);
 		case 4:
-			PORTC |= (1<<0);
+			set_bit(PORTC, 0);
 			getRowData();
-			PORTC |= (0<<0);
+			clear_bit(PORTC, 0);
 			break;
 		case 5:
-			PORTC |= (1<<1);
+			set_bit(PORTC, 1);
 			getRowData();
-			PORTC |= (0<<1);
+			clear_bit(PORTC, 1);
 			break;
 	}
 }
@@ -140,7 +141,7 @@ int main(void)
 		
 		for (int i = 0; i < 6; i++)
 		{
-			dataToMPU[i] = 0;
+			dataToMPU[i] = 0x00;
 		}
 	}
 }
