@@ -10,12 +10,9 @@ main.d main.o: .././main.c \
  c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\version.h \
  c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h \
  c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
- .././uart_pf/uart.h \
- c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\pgmspace.h \
- c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
- .././uart_pf/uart.c \
- c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
- .././uart_pf/uart.h
+ c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h \
+ c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
+ c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h
 
 c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -39,14 +36,8 @@ c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-
 
 c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h:
 
-.././uart_pf/uart.h:
+c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h:
 
-c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\pgmspace.h:
+c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h:
 
-c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h:
-
-.././uart_pf/uart.c:
-
-c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h:
-
-.././uart_pf/uart.h:
+c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:

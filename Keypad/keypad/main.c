@@ -9,7 +9,6 @@
 
 
 #define F_CPU 8000000UL
-#define UART_BAUD_RATE 9600
 
 #define set_bit(var, bit) ((var) |= (1 << (bit)))
 #define clear_bit(var, bit) ((var) &= (unsigned)~(1 << (bit)))
@@ -19,13 +18,11 @@
 #define byte uint8_t
 
 #include <avr/io.h>
-#include "uart_pf/uart.h"
-#include "uart_pf/uart.c"
-
+#include <util/delay.h>
 
 /*Rows and columns designated pins
-ROW0 PIND3
-ROW1 PIND4
+ROW0 PIND2
+ROW1 PIND3
 ROW2 PINB6
 ROW3 PINB7
 ROW4 PIND5
@@ -49,11 +46,11 @@ void getButtons(int colNum)
 	void getRowData(void)
 	{
 		//row-wise logging of data
-		if (bit_is_set(PIND, 3)) //ROW0
+		if (bit_is_set(PIND, 2)) //ROW0
 		{
 			dataToMPU[colNum] |= (1<<0);
 		}
-		if (bit_is_set(PIND, 4)) //ROW1
+		if (bit_is_set(PIND, 3)) //ROW1
 		{
 			dataToMPU[colNum] |= (1<<1);
 		}
@@ -116,9 +113,27 @@ void getButtons(int colNum)
 	}
 }
 
+void uartInit() 
+{
+	set_bit(UCSRB, TXEN);	// Enable UART transmitter mode
+	set_bit(UCSRC, URSEL);	// Register select
+	set_bit(UCSRC, UCSZ0);	
+	set_bit(UCSRC, UCSZ1);	// Select 8-bit packet mode
+	UBRRL = 51;				// Set baud rate (9600)
+}
+
+void uartTransmit(char *p)
+{
+	while(*p)
+	{
+		UDR = (*(p++));
+		while(bit_is_set(UCSRA, TXC));
+	}
+}
+
 int main(void)
 {
-	uart_init( UART_BAUD_SELECT(UART_BAUD_RATE,F_CPU) ); 
+	uartInit();
 
 /*	Setting the Data Direction Registers (DDRx)
 	0 - Input, 1 - Output					*/
@@ -136,7 +151,7 @@ int main(void)
 		
 		for (int i = 0; i < 6; i++)
 		{
-			uart_putc(/*dataToMPU[i]*/97);
+			uartTransmit(dataToMPU[i]);
 		}
 		
 		for (int i = 0; i < 6; i++)
@@ -144,4 +159,6 @@ int main(void)
 			dataToMPU[i] = 0x00;
 		}
 	}
+	//Shouldn't be called, but just in case
+	uartTransmit("KC_ERR_LP_BRK");
 }
