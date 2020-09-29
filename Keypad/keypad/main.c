@@ -7,7 +7,6 @@
 	to the main processing unit (MPU) using USART. 
  */ 
 
-
 #define F_CPU 8000000UL
 
 #define set_bit(var, bit) ((var) |= (1 << (bit)))
@@ -144,6 +143,7 @@ int main(void)
 	
     while (1) 
     {
+		start:
 		for (int i = 0; i < 6; i++)
 		{
 			getButtons(i);
@@ -161,4 +161,5 @@ int main(void)
 	}
 	//Shouldn't be called, but just in case
 	uartTransmit("KC_ERR_LP_BRK");
+	goto start;
 }
