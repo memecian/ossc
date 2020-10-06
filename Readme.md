@@ -27,9 +27,9 @@ Tasks ahead:
 - [ ] add schematics
 - [ ] make PCBs
 	- [ ] add pads and circuitry for batteries
-~~- [X] write code for the KC~~
-  ~~- [X] Fix ```lvalue required as left operand of assignment``` errors~~
-  ~~- [X] add UART functionality~~
-  ~~- [X] test circuit and code in Proteus~~
+- [X] write code for the KC~~
+  - [X] Fix ```lvalue required as left operand of assignment``` errors~~
+  - [X] add UART functionality~~
+  - [X] test circuit and code in Proteus~~
 - [ ] write code for the MPU
 - [ ] design case
