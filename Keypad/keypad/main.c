@@ -1,5 +1,5 @@
 /*
-	Alexander "Memecian" Malinin presents...
+	Alexander "Memecian" Komyakov presents...
 
 	keypad.c
 	------------------
@@ -112,7 +112,7 @@ void getButtons(int colNum)
 	}
 }
 
-void uartInit() 
+void uartInit(void) 
 {
 	set_bit(UCSRB, TXEN);	// Enable UART transmitter mode
 	set_bit(UCSRC, URSEL);	// Register select
@@ -121,12 +121,17 @@ void uartInit()
 	UBRRL = 51;				// Set baud rate (9600)
 }
 
-void uartTransmit(char *p)
+void uartTransmitC(unsigned char data)
+{
+	UDR = data;							// Putting data into *U*ART *D*ata *R*egister
+	while (bit_is_clear(UCSRA, UDRE));	// Wait until all data is transmitted.
+}
+
+void uartTransmitS(char *p)
 {
 	while(*p)
 	{
-		UDR = (*(p++));
-		while(bit_is_set(UCSRA, TXC));
+		uartTransmitC(*(p++));
 	}
 }
 
@@ -151,7 +156,7 @@ int main(void)
 		
 		for (int i = 0; i < 6; i++)
 		{
-			uartTransmit(dataToMPU[i]);
+			uartTransmitS(dataToMPU[i]);
 		}
 		
 		for (int i = 0; i < 6; i++)
@@ -160,6 +165,6 @@ int main(void)
 		}
 	}
 	//Shouldn't be called, but just in case
-	uartTransmit("KC_ERR_LP_BRK");
+	uartTransmitS("KC_ERR_LP_BRK");
 	goto start;
 }
