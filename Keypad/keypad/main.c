@@ -132,20 +132,19 @@ void uartTransmitS(char *p)
 	while(*p)
 	{
 		uartTransmitC(*(p++));
+		_delay_us(100);
 	}
 }
 
 int main(void)
 {
 	uartInit();
-
 /*	Setting the Data Direction Registers (DDRx)
 	0 - Input, 1 - Output					*/
 	
 	DDRB = 0b00011110;
 	DDRC = 0b00000011;
 	DDRD = 0b00000010;
-	
     while (1) 
     {
 		start:
@@ -158,7 +157,7 @@ int main(void)
 		{
 			uartTransmitS(dataToMPU[i]);
 		}
-		
+		uartTransmitC(' ');
 		for (int i = 0; i < 6; i++)
 		{
 			dataToMPU[i] = 0x00;

@@ -3,31 +3,31 @@ keypad.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000001ea  00000000  00000000  00000074  2**1
+  0 .text         00000200  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000000  00800060  00800060  0000025e  2**0
+  1 .data         00000000  00800060  00800060  00000274  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000006  00800060  00800060  0000025e  2**0
+  2 .bss          00000006  00800060  00800060  00000274  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  0000025e  2**0
+  3 .comment      00000030  00000000  00000000  00000274  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000290  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000002a4  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000048  00000000  00000000  000002cc  2**0
+  5 .debug_aranges 00000048  00000000  00000000  000002e0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   0000073b  00000000  00000000  00000314  2**0
+  6 .debug_info   00000815  00000000  00000000  00000328  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000005f7  00000000  00000000  00000a4f  2**0
+  7 .debug_abbrev 0000065a  00000000  00000000  00000b3d  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000003cc  00000000  00000000  00001046  2**0
+  8 .debug_line   0000044c  00000000  00000000  00001197  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000000a4  00000000  00000000  00001414  2**2
+  9 .debug_frame  000000a4  00000000  00000000  000015e4  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000316  00000000  00000000  000014b8  2**0
+ 10 .debug_str    00000361  00000000  00000000  00001688  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000001f8  00000000  00000000  000017ce  2**0
+ 11 .debug_loc    00000289  00000000  00000000  000019e9  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000038  00000000  00000000  000019c6  2**0
+ 12 .debug_ranges 00000050  00000000  00000000  00001c72  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -75,18 +75,18 @@ Disassembly of section .text:
   3e:	b2 07       	cpc	r27, r18
   40:	e1 f7       	brne	.-8      	; 0x3a <.do_clear_bss_loop>
   42:	97 d0       	rcall	.+302    	; 0x172 <main>
-  44:	d0 c0       	rjmp	.+416    	; 0x1e6 <_exit>
+  44:	db c0       	rjmp	.+438    	; 0x1fc <_exit>
 
 00000046 <__bad_interrupt>:
   46:	dc cf       	rjmp	.-72     	; 0x0 <__vectors>
 
 00000048 <getRowData.1732>:
+	while (bit_is_clear(UCSRA, UDRE));	// Wait until all data is transmitted.
+}
+
+void uartTransmitS(char *p)
 {
 	while(*p)
-	{
-		uartTransmitC(*(p++));
-	}
-}
   48:	2f 92       	push	r2
   4a:	3f 92       	push	r3
   4c:	f1 01       	movw	r30, r2
@@ -262,8 +262,8 @@ void uartInit(void)
 	UBRRL = 51;				// Set baud rate (9600)
  186:	83 e3       	ldi	r24, 0x33	; 51
  188:	89 b9       	out	0x09, r24	; 9
+{
 	uartInit();
-
 /*	Setting the Data Direction Registers (DDRx)
 	0 - Input, 1 - Output					*/
 	
@@ -278,92 +278,121 @@ void uartInit(void)
  194:	81 bb       	out	0x11, r24	; 17
  196:	06 e6       	ldi	r16, 0x66	; 102
  198:	10 e0       	ldi	r17, 0x00	; 0
-	
-    while (1) 
-    {
-		start:
-		for (int i = 0; i < 6; i++)
- 19a:	c0 e0       	ldi	r28, 0x00	; 0
- 19c:	d0 e0       	ldi	r29, 0x00	; 0
-		{
-			getButtons(i);
- 19e:	ce 01       	movw	r24, r28
- 1a0:	9b df       	rcall	.-202    	; 0xd8 <getButtons>
-	DDRD = 0b00000010;
-	
-    while (1) 
-    {
-		start:
-		for (int i = 0; i < 6; i++)
- 1a2:	21 96       	adiw	r28, 0x01	; 1
- 1a4:	c6 30       	cpi	r28, 0x06	; 6
- 1a6:	d1 05       	cpc	r29, r1
- 1a8:	d1 f7       	brne	.-12     	; 0x19e <main+0x2c>
- 1aa:	a0 e6       	ldi	r26, 0x60	; 96
- 1ac:	b0 e0       	ldi	r27, 0x00	; 0
-			getButtons(i);
-		}
-		
-		for (int i = 0; i < 6; i++)
-		{
-			uartTransmitS(dataToMPU[i]);
- 1ae:	ed 91       	ld	r30, X+
- 1b0:	f0 e0       	ldi	r31, 0x00	; 0
-	while (bit_is_clear(UCSRA, UDRE));	// Wait until all data is transmitted.
-}
-
-void uartTransmitS(char *p)
-{
-	while(*p)
- 1b2:	80 81       	ld	r24, Z
- 1b4:	88 23       	and	r24, r24
- 1b6:	39 f0       	breq	.+14     	; 0x1c6 <main+0x54>
-	{
-		uartTransmitC(*(p++));
- 1b8:	31 96       	adiw	r30, 0x01	; 1
 	UBRRL = 51;				// Set baud rate (9600)
 }
 
 void uartTransmitC(unsigned char data)
 {
 	UDR = data;							// Putting data into *U*ART *D*ata *R*egister
- 1ba:	8c b9       	out	0x0c, r24	; 12
+ 19a:	80 e2       	ldi	r24, 0x20	; 32
+ 19c:	f8 2e       	mov	r15, r24
+	DDRC = 0b00000011;
+	DDRD = 0b00000010;
+    while (1) 
+    {
+		start:
+		for (int i = 0; i < 6; i++)
+ 19e:	c0 e0       	ldi	r28, 0x00	; 0
+ 1a0:	d0 e0       	ldi	r29, 0x00	; 0
+		{
+			getButtons(i);
+ 1a2:	ce 01       	movw	r24, r28
+ 1a4:	99 df       	rcall	.-206    	; 0xd8 <getButtons>
+	DDRC = 0b00000011;
+	DDRD = 0b00000010;
+    while (1) 
+    {
+		start:
+		for (int i = 0; i < 6; i++)
+ 1a6:	21 96       	adiw	r28, 0x01	; 1
+ 1a8:	c6 30       	cpi	r28, 0x06	; 6
+ 1aa:	d1 05       	cpc	r29, r1
+ 1ac:	d1 f7       	brne	.-12     	; 0x1a2 <main+0x30>
+ 1ae:	a0 e6       	ldi	r26, 0x60	; 96
+ 1b0:	b0 e0       	ldi	r27, 0x00	; 0
+			getButtons(i);
+		}
+		
+		for (int i = 0; i < 6; i++)
+		{
+			uartTransmitS(dataToMPU[i]);
+ 1b2:	ed 91       	ld	r30, X+
 	while (bit_is_clear(UCSRA, UDRE));	// Wait until all data is transmitted.
- 1bc:	5d 9b       	sbis	0x0b, 5	; 11
- 1be:	fe cf       	rjmp	.-4      	; 0x1bc <main+0x4a>
 }
 
 void uartTransmitS(char *p)
 {
 	while(*p)
- 1c0:	80 81       	ld	r24, Z
- 1c2:	81 11       	cpse	r24, r1
- 1c4:	f9 cf       	rjmp	.-14     	; 0x1b8 <main+0x46>
+ 1b4:	f0 e0       	ldi	r31, 0x00	; 0
+ 1b6:	80 81       	ld	r24, Z
+ 1b8:	88 23       	and	r24, r24
+ 1ba:	69 f0       	breq	.+26     	; 0x1d6 <main+0x64>
+ 1bc:	31 96       	adiw	r30, 0x01	; 1
+	UBRRL = 51;				// Set baud rate (9600)
+}
+
+void uartTransmitC(unsigned char data)
+{
+	UDR = data;							// Putting data into *U*ART *D*ata *R*egister
+ 1be:	8c b9       	out	0x0c, r24	; 12
+	while (bit_is_clear(UCSRA, UDRE));	// Wait until all data is transmitted.
+ 1c0:	5d 9b       	sbis	0x0b, 5	; 11
+ 1c2:	fe cf       	rjmp	.-4      	; 0x1c0 <main+0x4e>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 1c4:	87 ec       	ldi	r24, 0xC7	; 199
+ 1c6:	90 e0       	ldi	r25, 0x00	; 0
+ 1c8:	01 97       	sbiw	r24, 0x01	; 1
+ 1ca:	f1 f7       	brne	.-4      	; 0x1c8 <main+0x56>
+ 1cc:	00 c0       	rjmp	.+0      	; 0x1ce <main+0x5c>
+ 1ce:	00 00       	nop
+}
+
+void uartTransmitS(char *p)
+{
+	while(*p)
+ 1d0:	81 91       	ld	r24, Z+
+ 1d2:	81 11       	cpse	r24, r1
+ 1d4:	f4 cf       	rjmp	.-24     	; 0x1be <main+0x4c>
 		for (int i = 0; i < 6; i++)
 		{
 			getButtons(i);
 		}
 		
 		for (int i = 0; i < 6; i++)
- 1c6:	0a 17       	cp	r16, r26
- 1c8:	1b 07       	cpc	r17, r27
- 1ca:	89 f7       	brne	.-30     	; 0x1ae <main+0x3c>
+ 1d6:	0a 17       	cp	r16, r26
+ 1d8:	1b 07       	cpc	r17, r27
+ 1da:	59 f7       	brne	.-42     	; 0x1b2 <main+0x40>
+	UBRRL = 51;				// Set baud rate (9600)
+}
+
+void uartTransmitC(unsigned char data)
+{
+	UDR = data;							// Putting data into *U*ART *D*ata *R*egister
+ 1dc:	fc b8       	out	0x0c, r15	; 12
+	while (bit_is_clear(UCSRA, UDRE));	// Wait until all data is transmitted.
+ 1de:	5d 9b       	sbis	0x0b, 5	; 11
+ 1e0:	fe cf       	rjmp	.-4      	; 0x1de <main+0x6c>
 			uartTransmitS(dataToMPU[i]);
 		}
-		
+		uartTransmitC(' ');
 		for (int i = 0; i < 6; i++)
 		{
 			dataToMPU[i] = 0x00;
- 1cc:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <_edata>
- 1d0:	10 92 61 00 	sts	0x0061, r1	; 0x800061 <_edata+0x1>
- 1d4:	10 92 62 00 	sts	0x0062, r1	; 0x800062 <_edata+0x2>
- 1d8:	10 92 63 00 	sts	0x0063, r1	; 0x800063 <_edata+0x3>
- 1dc:	10 92 64 00 	sts	0x0064, r1	; 0x800064 <_edata+0x4>
- 1e0:	10 92 65 00 	sts	0x0065, r1	; 0x800065 <_edata+0x5>
- 1e4:	da cf       	rjmp	.-76     	; 0x19a <main+0x28>
+ 1e2:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 1e6:	10 92 61 00 	sts	0x0061, r1	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 1ea:	10 92 62 00 	sts	0x0062, r1	; 0x800062 <__DATA_REGION_ORIGIN__+0x2>
+ 1ee:	10 92 63 00 	sts	0x0063, r1	; 0x800063 <__DATA_REGION_ORIGIN__+0x3>
+ 1f2:	10 92 64 00 	sts	0x0064, r1	; 0x800064 <__DATA_REGION_ORIGIN__+0x4>
+ 1f6:	10 92 65 00 	sts	0x0065, r1	; 0x800065 <__DATA_REGION_ORIGIN__+0x5>
+ 1fa:	d1 cf       	rjmp	.-94     	; 0x19e <main+0x2c>
 
-000001e6 <_exit>:
- 1e6:	f8 94       	cli
+000001fc <_exit>:
+ 1fc:	f8 94       	cli
 
-000001e8 <__stop_program>:
- 1e8:	ff cf       	rjmp	.-2      	; 0x1e8 <__stop_program>
+000001fe <__stop_program>:
+ 1fe:	ff cf       	rjmp	.-2      	; 0x1fe <__stop_program>
