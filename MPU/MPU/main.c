@@ -16,17 +16,19 @@
 #include <util/delay.h>
 
 uint8_t sysBools = 0;
-
+/*
+BIT 0 - shift
+BIT 1 - alt
+BIT 2 - 
+BIT 3 - 
+BIT 4 - 
+BIT 5 - 
+BIT 6 - 
+BIT 7 -
+*/
 char received[6] = {0};
 char receivedLast[6] = {0};
-
-char getBool (uint8_t bit)
-{
-	if (bit_is_set(sysBools, bit))
-	{return true;} 
-	else
-	{return false;}
-}
+char lcdisplay[64] = {0};
 
 void setBool (uint8_t bit, uint8_t val)
 {
@@ -73,6 +75,9 @@ int main(void)
 	uartInit();
     while (1) 
     {
-		
+		if (getButtons(0, 0))
+		{
+			set_bit(sysBools, 1);
+		}
     }
 }

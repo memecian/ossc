@@ -157,13 +157,13 @@ int main(void)
 		{
 			uartTransmitS(dataToMPU[i]);
 		}
-		uartTransmitC(' ');
+		uartTransmitC('\r');
 		for (int i = 0; i < 6; i++)
 		{
 			dataToMPU[i] = 0x00;
 		}
 	}
 	//Shouldn't be called, but just in case
-	uartTransmitS("KC_ERR_LP_BRK");
+	uartTransmitS("KC_ERR_LP_BRK" + '\r');
 	goto start;
 }

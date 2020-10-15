@@ -284,7 +284,7 @@ void uartInit(void)
 void uartTransmitC(unsigned char data)
 {
 	UDR = data;							// Putting data into *U*ART *D*ata *R*egister
- 19a:	80 e2       	ldi	r24, 0x20	; 32
+ 19a:	8d e0       	ldi	r24, 0x0D	; 13
  19c:	f8 2e       	mov	r15, r24
 	DDRC = 0b00000011;
 	DDRD = 0b00000010;
@@ -379,7 +379,7 @@ void uartTransmitC(unsigned char data)
  1e0:	fe cf       	rjmp	.-4      	; 0x1de <main+0x6c>
 			uartTransmitS(dataToMPU[i]);
 		}
-		uartTransmitC(' ');
+		uartTransmitC('\r');
 		for (int i = 0; i < 6; i++)
 		{
 			dataToMPU[i] = 0x00;
