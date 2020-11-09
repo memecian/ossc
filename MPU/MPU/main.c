@@ -30,12 +30,16 @@ char received[6] = {0};
 char receivedLast[6] = {0};
 char lcdisplay[64] = {0};
 
-void setBool (uint8_t bit, uint8_t val)
+void flipBool (uint8_t bit)
 {
-	if (val == 1)
-	{set_bit(sysBools, bit);}
+	if (bit_is_set(sysBools, bit))
+	{
+		clear_bit(sysBools, bit);
+	}
 	else
-	{clear_bit(sysBools, bit);}
+	{
+		set_bit(sysBools, bit);
+	}
 }
 
 char getButtons (int x, int y)
@@ -77,7 +81,7 @@ int main(void)
     {
 		if (getButtons(0, 0))
 		{
-			set_bit(sysBools, 1);
+			flipBool(1);
 		}
     }
 }

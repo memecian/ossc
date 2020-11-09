@@ -3,31 +3,31 @@ MPU.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000000  00800200  00800200  000001c6  2**0
+  0 .data         00000000  00800200  00800200  00000214  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         00000152  00000000  00000000  00000074  2**1
+  1 .text         000001a0  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000007  00800200  00800200  000001c6  2**0
+  2 .bss          00000007  00800200  00800200  00000214  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  000001c6  2**0
+  3 .comment      00000030  00000000  00000000  00000214  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000001f8  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000244  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000048  00000000  00000000  00000238  2**0
+  5 .debug_aranges 00000048  00000000  00000000  00000284  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00000c22  00000000  00000000  00000280  2**0
+  6 .debug_info   00000c28  00000000  00000000  000002cc  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000ac9  00000000  00000000  00000ea2  2**0
+  7 .debug_abbrev 00000ad6  00000000  00000000  00000ef4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000350  00000000  00000000  0000196b  2**0
+  8 .debug_line   00000350  00000000  00000000  000019ca  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000074  00000000  00000000  00001cbc  2**2
+  9 .debug_frame  00000074  00000000  00000000  00001d1c  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000513  00000000  00000000  00001d30  2**0
+ 10 .debug_str    00000514  00000000  00000000  00001d90  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000000ad  00000000  00000000  00002243  2**0
+ 11 .debug_loc    000000ad  00000000  00000000  000022a4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000038  00000000  00000000  000022f0  2**0
+ 12 .debug_ranges 00000038  00000000  00000000  00002351  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -159,79 +159,117 @@ Disassembly of section .text:
   e6:	a7 30       	cpi	r26, 0x07	; 7
   e8:	b2 07       	cpc	r27, r18
   ea:	e1 f7       	brne	.-8      	; 0xe4 <.do_clear_bss_loop>
-  ec:	22 d0       	rcall	.+68     	; 0x132 <main>
-  ee:	2f c0       	rjmp	.+94     	; 0x14e <_exit>
+  ec:	4c d0       	rcall	.+152    	; 0x186 <main>
+  ee:	56 c0       	rjmp	.+172    	; 0x19c <_exit>
 
 000000f0 <__bad_interrupt>:
   f0:	87 cf       	rjmp	.-242    	; 0x0 <__vectors>
 
-000000f2 <getButtons>:
+000000f2 <flipBool>:
 {
 	do 
 	{
 		*(buffer++) = uartReceiveC;
 	} while ((buffer-1)!='\r');		// Waiting for carriage return
 	*buffer = '\0';					// Standard C string termination symbol
-  f2:	80 50       	subi	r24, 0x00	; 0
-  f4:	9e 4f       	sbci	r25, 0xFE	; 254
-  f6:	fc 01       	movw	r30, r24
-  f8:	80 81       	ld	r24, Z
-  fa:	90 e0       	ldi	r25, 0x00	; 0
-  fc:	02 c0       	rjmp	.+4      	; 0x102 <getButtons+0x10>
-  fe:	95 95       	asr	r25
- 100:	87 95       	ror	r24
- 102:	6a 95       	dec	r22
- 104:	e2 f7       	brpl	.-8      	; 0xfe <getButtons+0xc>
- 106:	81 70       	andi	r24, 0x01	; 1
- 108:	08 95       	ret
+  f2:	20 91 06 02 	lds	r18, 0x0206	; 0x800206 <sysBools>
+  f6:	30 e0       	ldi	r19, 0x00	; 0
+  f8:	08 2e       	mov	r0, r24
+  fa:	02 c0       	rjmp	.+4      	; 0x100 <flipBool+0xe>
+  fc:	35 95       	asr	r19
+  fe:	27 95       	ror	r18
+ 100:	0a 94       	dec	r0
+ 102:	e2 f7       	brpl	.-8      	; 0xfc <flipBool+0xa>
+ 104:	20 ff       	sbrs	r18, 0
+ 106:	10 c0       	rjmp	.+32     	; 0x128 <flipBool+0x36>
+ 108:	21 e0       	ldi	r18, 0x01	; 1
+ 10a:	30 e0       	ldi	r19, 0x00	; 0
+ 10c:	a9 01       	movw	r20, r18
+ 10e:	02 c0       	rjmp	.+4      	; 0x114 <flipBool+0x22>
+ 110:	44 0f       	add	r20, r20
+ 112:	55 1f       	adc	r21, r21
+ 114:	8a 95       	dec	r24
+ 116:	e2 f7       	brpl	.-8      	; 0x110 <flipBool+0x1e>
+ 118:	ca 01       	movw	r24, r20
+ 11a:	80 95       	com	r24
+ 11c:	90 91 06 02 	lds	r25, 0x0206	; 0x800206 <sysBools>
+ 120:	89 23       	and	r24, r25
+ 122:	80 93 06 02 	sts	0x0206, r24	; 0x800206 <sysBools>
+ 126:	08 95       	ret
+ 128:	21 e0       	ldi	r18, 0x01	; 1
+ 12a:	30 e0       	ldi	r19, 0x00	; 0
+ 12c:	a9 01       	movw	r20, r18
+ 12e:	02 c0       	rjmp	.+4      	; 0x134 <flipBool+0x42>
+ 130:	44 0f       	add	r20, r20
+ 132:	55 1f       	adc	r21, r21
+ 134:	8a 95       	dec	r24
+ 136:	e2 f7       	brpl	.-8      	; 0x130 <flipBool+0x3e>
+ 138:	ca 01       	movw	r24, r20
+ 13a:	90 91 06 02 	lds	r25, 0x0206	; 0x800206 <sysBools>
+ 13e:	89 2b       	or	r24, r25
+ 140:	80 93 06 02 	sts	0x0206, r24	; 0x800206 <sysBools>
+ 144:	08 95       	ret
 
-0000010a <uartInit>:
- 10a:	e1 ec       	ldi	r30, 0xC1	; 193
- 10c:	f0 e0       	ldi	r31, 0x00	; 0
- 10e:	80 81       	ld	r24, Z
- 110:	80 61       	ori	r24, 0x10	; 16
- 112:	80 83       	st	Z, r24
- 114:	e2 ec       	ldi	r30, 0xC2	; 194
- 116:	f0 e0       	ldi	r31, 0x00	; 0
- 118:	80 81       	ld	r24, Z
- 11a:	80 64       	ori	r24, 0x40	; 64
- 11c:	80 83       	st	Z, r24
- 11e:	80 81       	ld	r24, Z
- 120:	82 60       	ori	r24, 0x02	; 2
- 122:	80 83       	st	Z, r24
- 124:	80 81       	ld	r24, Z
- 126:	84 60       	ori	r24, 0x04	; 4
- 128:	80 83       	st	Z, r24
- 12a:	83 e3       	ldi	r24, 0x33	; 51
- 12c:	80 93 c4 00 	sts	0x00C4, r24	; 0x8000c4 <__TEXT_REGION_LENGTH__+0x7000c4>
- 130:	08 95       	ret
+00000146 <getButtons>:
+ 146:	80 50       	subi	r24, 0x00	; 0
+ 148:	9e 4f       	sbci	r25, 0xFE	; 254
+ 14a:	fc 01       	movw	r30, r24
+ 14c:	80 81       	ld	r24, Z
+ 14e:	90 e0       	ldi	r25, 0x00	; 0
+ 150:	02 c0       	rjmp	.+4      	; 0x156 <getButtons+0x10>
+ 152:	95 95       	asr	r25
+ 154:	87 95       	ror	r24
+ 156:	6a 95       	dec	r22
+ 158:	e2 f7       	brpl	.-8      	; 0x152 <getButtons+0xc>
+ 15a:	81 70       	andi	r24, 0x01	; 1
+ 15c:	08 95       	ret
 
-00000132 <main>:
+0000015e <uartInit>:
+ 15e:	e1 ec       	ldi	r30, 0xC1	; 193
+ 160:	f0 e0       	ldi	r31, 0x00	; 0
+ 162:	80 81       	ld	r24, Z
+ 164:	80 61       	ori	r24, 0x10	; 16
+ 166:	80 83       	st	Z, r24
+ 168:	e2 ec       	ldi	r30, 0xC2	; 194
+ 16a:	f0 e0       	ldi	r31, 0x00	; 0
+ 16c:	80 81       	ld	r24, Z
+ 16e:	80 64       	ori	r24, 0x40	; 64
+ 170:	80 83       	st	Z, r24
+ 172:	80 81       	ld	r24, Z
+ 174:	82 60       	ori	r24, 0x02	; 2
+ 176:	80 83       	st	Z, r24
+ 178:	80 81       	ld	r24, Z
+ 17a:	84 60       	ori	r24, 0x04	; 4
+ 17c:	80 83       	st	Z, r24
+ 17e:	83 e3       	ldi	r24, 0x33	; 51
+ 180:	80 93 c4 00 	sts	0x00C4, r24	; 0x8000c4 <__TEXT_REGION_LENGTH__+0x7000c4>
+ 184:	08 95       	ret
+
+00000186 <main>:
 }
 
 int main(void)
 {
 	uartInit();
- 132:	eb df       	rcall	.-42     	; 0x10a <uartInit>
+ 186:	eb df       	rcall	.-42     	; 0x15e <uartInit>
     while (1) 
     {
 		if (getButtons(0, 0))
- 134:	60 e0       	ldi	r22, 0x00	; 0
- 136:	70 e0       	ldi	r23, 0x00	; 0
- 138:	80 e0       	ldi	r24, 0x00	; 0
- 13a:	90 e0       	ldi	r25, 0x00	; 0
- 13c:	da df       	rcall	.-76     	; 0xf2 <getButtons>
- 13e:	88 23       	and	r24, r24
- 140:	c9 f3       	breq	.-14     	; 0x134 <main+0x2>
+ 188:	60 e0       	ldi	r22, 0x00	; 0
+ 18a:	70 e0       	ldi	r23, 0x00	; 0
+ 18c:	80 e0       	ldi	r24, 0x00	; 0
+ 18e:	90 e0       	ldi	r25, 0x00	; 0
+ 190:	da df       	rcall	.-76     	; 0x146 <getButtons>
+ 192:	88 23       	and	r24, r24
+ 194:	c9 f3       	breq	.-14     	; 0x188 <main+0x2>
 		{
-			set_bit(sysBools, 1);
- 142:	80 91 06 02 	lds	r24, 0x0206	; 0x800206 <sysBools>
- 146:	82 60       	ori	r24, 0x02	; 2
- 148:	80 93 06 02 	sts	0x0206, r24	; 0x800206 <sysBools>
- 14c:	f3 cf       	rjmp	.-26     	; 0x134 <main+0x2>
+			flipBool(1);
+ 196:	81 e0       	ldi	r24, 0x01	; 1
+ 198:	ac df       	rcall	.-168    	; 0xf2 <flipBool>
+ 19a:	f6 cf       	rjmp	.-20     	; 0x188 <main+0x2>
 
-0000014e <_exit>:
- 14e:	f8 94       	cli
+0000019c <_exit>:
+ 19c:	f8 94       	cli
 
-00000150 <__stop_program>:
- 150:	ff cf       	rjmp	.-2      	; 0x150 <__stop_program>
+0000019e <__stop_program>:
+ 19e:	ff cf       	rjmp	.-2      	; 0x19e <__stop_program>
