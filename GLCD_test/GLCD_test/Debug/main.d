@@ -9,10 +9,7 @@ main.d main.o: .././main.c \
  c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\common.h \
  c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\version.h \
  c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h \
- c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
- c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h \
- c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
- c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h
+ c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h
 
 c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -35,9 +32,3 @@ c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-
 c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h:
 
 c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h:
-
-c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h:
-
-c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h:
-
-c:\absolut\ alkoholische\ anwendungen\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:

@@ -1,8 +1,8 @@
 /*
- * MPU.c
- * Created: 21.09.2020 14:01:39
- * Author : Administrator
- */ 
+* MPU.c
+* Created: 21.09.2020 14:01:39
+* Author : Administrator
+*/
 #define F_CPU 8000000UL
 #define true 1
 #define false 0
@@ -15,37 +15,20 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-uint8_t sysBools = 0;
-/*
-BIT 0 - shift
-BIT 1 - alt
-BIT 2 - 
-BIT 3 - 
-BIT 4 - 
-BIT 5 - 
-BIT 6 - 
-BIT 7 -
-*/
+struct sysBools
+{
+	unsigned int shift : 1;
+	unsigned int alt : 1;
+};
 char received[6] = {0};
 char receivedLast[6] = {0};
 char lcdisplay[64] = {0};
 
-void flipBool (uint8_t bit)
-{
-	if (bit_is_set(sysBools, bit))
-	{
-		clear_bit(sysBools, bit);
-	}
-	else
-	{
-		set_bit(sysBools, bit);
-	}
-}
 
-char getButtons (int x, int y)
+char getButton(int x, int y)
 {
 	if (bit_is_set(received[x], y))
-	{return true;} 
+	{return true;}
 	else
 	{return false;}
 }
@@ -54,7 +37,7 @@ void uartInit(void)
 {
 	set_bit(UCSR0B, RXEN0);		// Enable UART receiver mode
 	set_bit(UCSR0C, UMSEL00);	// Register select
-	set_bit(UCSR0C, UCSZ00);	 
+	set_bit(UCSR0C, UCSZ00);
 	set_bit(UCSR0C, UCSZ01);	// Select 8-bit packet mode
 	UBRR0L = 51;				// Set baud rate (9600)
 }
@@ -67,9 +50,9 @@ char uartReceiveC(void)
 
 void uartReceiveS(char *buffer)
 {
-	do 
+	do
 	{
-		*(buffer++) = uartReceiveC;
+		*(buffer++) = uartReceiveC();
 	} while ((buffer-1)!='\r');		// Waiting for carriage return
 	*buffer = '\0';					// Standard C string termination symbol
 }
@@ -77,11 +60,15 @@ void uartReceiveS(char *buffer)
 int main(void)
 {
 	uartInit();
-    while (1) 
-    {
-		if (getButtons(0, 0))
+	while (1)
+	{	
+		/*
+			Processing basic commands (0-9, plus, minus, all that jazz)
+		*/
+			
+		for (int i = 0; i > 6; i++)
 		{
-			flipBool(1);
+			receivedLast[i] = received[i];
 		}
-    }
+	}
 }

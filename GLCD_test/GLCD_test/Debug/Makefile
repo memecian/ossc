@@ -58,9 +58,9 @@ main.d
 C_DEPS_AS_ARGS +=  \
 main.d
 
-OUTPUT_FILE_PATH +=MPU.elf
+OUTPUT_FILE_PATH +=GLCD_test.elf
 
-OUTPUT_FILE_PATH_AS_ARGS +=MPU.elf
+OUTPUT_FILE_PATH_AS_ARGS +=GLCD_test.elf
 
 ADDITIONAL_DEPENDENCIES:=
 
@@ -105,13 +105,13 @@ all: $(OUTPUT_FILE_PATH) $(ADDITIONAL_DEPENDENCIES)
 $(OUTPUT_FILE_PATH): $(OBJS) $(USER_OBJS) $(OUTPUT_FILE_DEP) $(LIB_DEP) $(LINKER_SCRIPT_DEP)
 	@echo Building target: $@
 	@echo Invoking: AVR/GNU Linker : 5.4.0
-	$(QUOTE)C:\Absolut Alkoholische Anwendungen\Atmel Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE) -o$(OUTPUT_FILE_PATH_AS_ARGS) $(OBJS_AS_ARGS) $(USER_OBJS) $(LIBS) -Wl,-Map="MPU.map" -Wl,--start-group -Wl,-lm  -Wl,--end-group -Wl,--gc-sections -mrelax -mmcu=atmega2561 -B "C:\Absolut Alkoholische Anwendungen\Atmel Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega2561"  
+	$(QUOTE)C:\Absolut Alkoholische Anwendungen\Atmel Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE) -o$(OUTPUT_FILE_PATH_AS_ARGS) $(OBJS_AS_ARGS) $(USER_OBJS) $(LIBS) -Wl,-Map="GLCD_test.map" -Wl,--start-group -Wl,-lm  -Wl,--end-group -Wl,--gc-sections -mrelax -mmcu=atmega2561 -B "C:\Absolut Alkoholische Anwendungen\Atmel Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega2561"  
 	@echo Finished building target: $@
-	"C:\Absolut Alkoholische Anwendungen\Atmel Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures  "MPU.elf" "MPU.hex"
-	"C:\Absolut Alkoholische Anwendungen\Atmel Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -j .eeprom  --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0  --no-change-warnings -O ihex "MPU.elf" "MPU.eep" || exit 0
-	"C:\Absolut Alkoholische Anwendungen\Atmel Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objdump.exe" -h -S "MPU.elf" > "MPU.lss"
-	"C:\Absolut Alkoholische Anwendungen\Atmel Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O srec -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures "MPU.elf" "MPU.srec"
-	"C:\Absolut Alkoholische Anwendungen\Atmel Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-size.exe" "MPU.elf"
+	"C:\Absolut Alkoholische Anwendungen\Atmel Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures  "GLCD_test.elf" "GLCD_test.hex"
+	"C:\Absolut Alkoholische Anwendungen\Atmel Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -j .eeprom  --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0  --no-change-warnings -O ihex "GLCD_test.elf" "GLCD_test.eep" || exit 0
+	"C:\Absolut Alkoholische Anwendungen\Atmel Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objdump.exe" -h -S "GLCD_test.elf" > "GLCD_test.lss"
+	"C:\Absolut Alkoholische Anwendungen\Atmel Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O srec -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures "GLCD_test.elf" "GLCD_test.srec"
+	"C:\Absolut Alkoholische Anwendungen\Atmel Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-size.exe" "GLCD_test.elf"
 	
 	
 
@@ -123,5 +123,5 @@ $(OUTPUT_FILE_PATH): $(OBJS) $(USER_OBJS) $(OUTPUT_FILE_DEP) $(LIB_DEP) $(LINKER
 clean:
 	-$(RM) $(OBJS_AS_ARGS) $(EXECUTABLES)  
 	-$(RM) $(C_DEPS_AS_ARGS)   
-	rm -rf "MPU.elf" "MPU.a" "MPU.hex" "MPU.lss" "MPU.eep" "MPU.map" "MPU.srec" "MPU.usersignatures"
+	rm -rf "GLCD_test.elf" "GLCD_test.a" "GLCD_test.hex" "GLCD_test.lss" "GLCD_test.eep" "GLCD_test.map" "GLCD_test.srec" "GLCD_test.usersignatures"
 	

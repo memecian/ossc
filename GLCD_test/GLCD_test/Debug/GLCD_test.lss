@@ -1,0 +1,329 @@
+
+GLCD_test.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800200  00800200  00000266  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000212  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .comment      00000030  00000000  00000000  00000266  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000298  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000058  00000000  00000000  000002d8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000c85  00000000  00000000  00000330  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000af2  00000000  00000000  00000fb5  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   0000043a  00000000  00000000  00001aa7  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  000000b8  00000000  00000000  00001ee4  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000528  00000000  00000000  00001f9c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000001f6  00000000  00000000  000024c4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000060  00000000  00000000  000026ba  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	65 c0       	rjmp	.+202    	; 0xcc <__ctors_end>
+   2:	00 00       	nop
+   4:	6d c0       	rjmp	.+218    	; 0xe0 <__bad_interrupt>
+   6:	00 00       	nop
+   8:	6b c0       	rjmp	.+214    	; 0xe0 <__bad_interrupt>
+   a:	00 00       	nop
+   c:	69 c0       	rjmp	.+210    	; 0xe0 <__bad_interrupt>
+   e:	00 00       	nop
+  10:	67 c0       	rjmp	.+206    	; 0xe0 <__bad_interrupt>
+  12:	00 00       	nop
+  14:	65 c0       	rjmp	.+202    	; 0xe0 <__bad_interrupt>
+  16:	00 00       	nop
+  18:	63 c0       	rjmp	.+198    	; 0xe0 <__bad_interrupt>
+  1a:	00 00       	nop
+  1c:	61 c0       	rjmp	.+194    	; 0xe0 <__bad_interrupt>
+  1e:	00 00       	nop
+  20:	5f c0       	rjmp	.+190    	; 0xe0 <__bad_interrupt>
+  22:	00 00       	nop
+  24:	5d c0       	rjmp	.+186    	; 0xe0 <__bad_interrupt>
+  26:	00 00       	nop
+  28:	5b c0       	rjmp	.+182    	; 0xe0 <__bad_interrupt>
+  2a:	00 00       	nop
+  2c:	59 c0       	rjmp	.+178    	; 0xe0 <__bad_interrupt>
+  2e:	00 00       	nop
+  30:	57 c0       	rjmp	.+174    	; 0xe0 <__bad_interrupt>
+  32:	00 00       	nop
+  34:	55 c0       	rjmp	.+170    	; 0xe0 <__bad_interrupt>
+  36:	00 00       	nop
+  38:	53 c0       	rjmp	.+166    	; 0xe0 <__bad_interrupt>
+  3a:	00 00       	nop
+  3c:	51 c0       	rjmp	.+162    	; 0xe0 <__bad_interrupt>
+  3e:	00 00       	nop
+  40:	4f c0       	rjmp	.+158    	; 0xe0 <__bad_interrupt>
+  42:	00 00       	nop
+  44:	4d c0       	rjmp	.+154    	; 0xe0 <__bad_interrupt>
+  46:	00 00       	nop
+  48:	4b c0       	rjmp	.+150    	; 0xe0 <__bad_interrupt>
+  4a:	00 00       	nop
+  4c:	49 c0       	rjmp	.+146    	; 0xe0 <__bad_interrupt>
+  4e:	00 00       	nop
+  50:	47 c0       	rjmp	.+142    	; 0xe0 <__bad_interrupt>
+  52:	00 00       	nop
+  54:	45 c0       	rjmp	.+138    	; 0xe0 <__bad_interrupt>
+  56:	00 00       	nop
+  58:	43 c0       	rjmp	.+134    	; 0xe0 <__bad_interrupt>
+  5a:	00 00       	nop
+  5c:	41 c0       	rjmp	.+130    	; 0xe0 <__bad_interrupt>
+  5e:	00 00       	nop
+  60:	3f c0       	rjmp	.+126    	; 0xe0 <__bad_interrupt>
+  62:	00 00       	nop
+  64:	3d c0       	rjmp	.+122    	; 0xe0 <__bad_interrupt>
+  66:	00 00       	nop
+  68:	3b c0       	rjmp	.+118    	; 0xe0 <__bad_interrupt>
+  6a:	00 00       	nop
+  6c:	39 c0       	rjmp	.+114    	; 0xe0 <__bad_interrupt>
+  6e:	00 00       	nop
+  70:	37 c0       	rjmp	.+110    	; 0xe0 <__bad_interrupt>
+  72:	00 00       	nop
+  74:	35 c0       	rjmp	.+106    	; 0xe0 <__bad_interrupt>
+  76:	00 00       	nop
+  78:	33 c0       	rjmp	.+102    	; 0xe0 <__bad_interrupt>
+  7a:	00 00       	nop
+  7c:	31 c0       	rjmp	.+98     	; 0xe0 <__bad_interrupt>
+  7e:	00 00       	nop
+  80:	2f c0       	rjmp	.+94     	; 0xe0 <__bad_interrupt>
+  82:	00 00       	nop
+  84:	2d c0       	rjmp	.+90     	; 0xe0 <__bad_interrupt>
+  86:	00 00       	nop
+  88:	2b c0       	rjmp	.+86     	; 0xe0 <__bad_interrupt>
+  8a:	00 00       	nop
+  8c:	29 c0       	rjmp	.+82     	; 0xe0 <__bad_interrupt>
+  8e:	00 00       	nop
+  90:	27 c0       	rjmp	.+78     	; 0xe0 <__bad_interrupt>
+  92:	00 00       	nop
+  94:	25 c0       	rjmp	.+74     	; 0xe0 <__bad_interrupt>
+  96:	00 00       	nop
+  98:	23 c0       	rjmp	.+70     	; 0xe0 <__bad_interrupt>
+  9a:	00 00       	nop
+  9c:	21 c0       	rjmp	.+66     	; 0xe0 <__bad_interrupt>
+  9e:	00 00       	nop
+  a0:	1f c0       	rjmp	.+62     	; 0xe0 <__bad_interrupt>
+  a2:	00 00       	nop
+  a4:	1d c0       	rjmp	.+58     	; 0xe0 <__bad_interrupt>
+  a6:	00 00       	nop
+  a8:	1b c0       	rjmp	.+54     	; 0xe0 <__bad_interrupt>
+  aa:	00 00       	nop
+  ac:	19 c0       	rjmp	.+50     	; 0xe0 <__bad_interrupt>
+  ae:	00 00       	nop
+  b0:	17 c0       	rjmp	.+46     	; 0xe0 <__bad_interrupt>
+  b2:	00 00       	nop
+  b4:	15 c0       	rjmp	.+42     	; 0xe0 <__bad_interrupt>
+  b6:	00 00       	nop
+  b8:	13 c0       	rjmp	.+38     	; 0xe0 <__bad_interrupt>
+  ba:	00 00       	nop
+  bc:	11 c0       	rjmp	.+34     	; 0xe0 <__bad_interrupt>
+  be:	00 00       	nop
+  c0:	0f c0       	rjmp	.+30     	; 0xe0 <__bad_interrupt>
+  c2:	00 00       	nop
+  c4:	0d c0       	rjmp	.+26     	; 0xe0 <__bad_interrupt>
+  c6:	00 00       	nop
+  c8:	0b c0       	rjmp	.+22     	; 0xe0 <__bad_interrupt>
+	...
+
+000000cc <__ctors_end>:
+  cc:	11 24       	eor	r1, r1
+  ce:	1f be       	out	0x3f, r1	; 63
+  d0:	cf ef       	ldi	r28, 0xFF	; 255
+  d2:	d1 e2       	ldi	r29, 0x21	; 33
+  d4:	de bf       	out	0x3e, r29	; 62
+  d6:	cd bf       	out	0x3d, r28	; 61
+  d8:	00 e0       	ldi	r16, 0x00	; 0
+  da:	0c bf       	out	0x3c, r16	; 60
+  dc:	95 d0       	rcall	.+298    	; 0x208 <main>
+  de:	97 c0       	rjmp	.+302    	; 0x20e <_exit>
+
+000000e0 <__bad_interrupt>:
+  e0:	8f cf       	rjmp	.-226    	; 0x0 <__vectors>
+
+000000e2 <glcdInit>:
+
+void _glcdManualCommand(int cmd, int dig)
+{
+	COMMAND = cmd;
+	DIGITAL = dig;
+	COMMAND, DIGITAL = 0;
+  e2:	8f ef       	ldi	r24, 0xFF	; 255
+  e4:	87 b9       	out	0x07, r24	; 7
+  e6:	87 e0       	ldi	r24, 0x07	; 7
+  e8:	81 b9       	out	0x01, r24	; 1
+  ea:	82 e0       	ldi	r24, 0x02	; 2
+  ec:	82 b9       	out	0x02, r24	; 2
+  ee:	8f ea       	ldi	r24, 0xAF	; 175
+  f0:	88 b9       	out	0x08, r24	; 8
+  f2:	80 e4       	ldi	r24, 0x40	; 64
+  f4:	88 b9       	out	0x08, r24	; 8
+  f6:	82 b1       	in	r24, 0x02	; 2
+  f8:	18 b8       	out	0x08, r1	; 8
+  fa:	08 95       	ret
+
+000000fc <glcdWrite>:
+  fc:	86 e0       	ldi	r24, 0x06	; 6
+  fe:	82 b9       	out	0x02, r24	; 2
+ 100:	12 b8       	out	0x02, r1	; 2
+ 102:	08 95       	ret
+
+00000104 <glcdPixel>:
+ 104:	0f 93       	push	r16
+ 106:	1f 93       	push	r17
+ 108:	cf 93       	push	r28
+ 10a:	df 93       	push	r29
+ 10c:	20 e0       	ldi	r18, 0x00	; 0
+ 10e:	30 e0       	ldi	r19, 0x00	; 0
+ 110:	e0 eb       	ldi	r30, 0xB0	; 176
+ 112:	f0 e0       	ldi	r31, 0x00	; 0
+ 114:	90 e0       	ldi	r25, 0x00	; 0
+ 116:	a1 e0       	ldi	r26, 0x01	; 1
+ 118:	b0 e0       	ldi	r27, 0x00	; 0
+ 11a:	ac 01       	movw	r20, r24
+ 11c:	02 2e       	mov	r0, r18
+ 11e:	02 c0       	rjmp	.+4      	; 0x124 <glcdPixel+0x20>
+ 120:	55 95       	asr	r21
+ 122:	47 95       	ror	r20
+ 124:	0a 94       	dec	r0
+ 126:	e2 f7       	brpl	.-8      	; 0x120 <glcdPixel+0x1c>
+ 128:	40 ff       	sbrs	r20, 0
+ 12a:	09 c0       	rjmp	.+18     	; 0x13e <glcdPixel+0x3a>
+ 12c:	ad 01       	movw	r20, r26
+ 12e:	02 2e       	mov	r0, r18
+ 130:	02 c0       	rjmp	.+4      	; 0x136 <glcdPixel+0x32>
+ 132:	44 0f       	add	r20, r20
+ 134:	55 1f       	adc	r21, r21
+ 136:	0a 94       	dec	r0
+ 138:	e2 f7       	brpl	.-8      	; 0x132 <glcdPixel+0x2e>
+ 13a:	e4 2b       	or	r30, r20
+ 13c:	f5 2b       	or	r31, r21
+ 13e:	2f 5f       	subi	r18, 0xFF	; 255
+ 140:	3f 4f       	sbci	r19, 0xFF	; 255
+ 142:	24 30       	cpi	r18, 0x04	; 4
+ 144:	31 05       	cpc	r19, r1
+ 146:	49 f7       	brne	.-46     	; 0x11a <glcdPixel+0x16>
+ 148:	84 e0       	ldi	r24, 0x04	; 4
+ 14a:	90 e0       	ldi	r25, 0x00	; 0
+ 14c:	a0 e1       	ldi	r26, 0x10	; 16
+ 14e:	b0 e0       	ldi	r27, 0x00	; 0
+ 150:	70 e0       	ldi	r23, 0x00	; 0
+ 152:	c1 e0       	ldi	r28, 0x01	; 1
+ 154:	d0 e0       	ldi	r29, 0x00	; 0
+ 156:	9b 01       	movw	r18, r22
+ 158:	ab 01       	movw	r20, r22
+ 15a:	08 2e       	mov	r0, r24
+ 15c:	02 c0       	rjmp	.+4      	; 0x162 <glcdPixel+0x5e>
+ 15e:	55 95       	asr	r21
+ 160:	47 95       	ror	r20
+ 162:	0a 94       	dec	r0
+ 164:	e2 f7       	brpl	.-8      	; 0x15e <glcdPixel+0x5a>
+ 166:	40 ff       	sbrs	r20, 0
+ 168:	0b c0       	rjmp	.+22     	; 0x180 <glcdPixel+0x7c>
+ 16a:	ac 01       	movw	r20, r24
+ 16c:	44 50       	subi	r20, 0x04	; 4
+ 16e:	51 09       	sbc	r21, r1
+ 170:	8e 01       	movw	r16, r28
+ 172:	02 c0       	rjmp	.+4      	; 0x178 <glcdPixel+0x74>
+ 174:	00 0f       	add	r16, r16
+ 176:	11 1f       	adc	r17, r17
+ 178:	4a 95       	dec	r20
+ 17a:	e2 f7       	brpl	.-8      	; 0x174 <glcdPixel+0x70>
+ 17c:	a0 2b       	or	r26, r16
+ 17e:	b1 2b       	or	r27, r17
+ 180:	01 96       	adiw	r24, 0x01	; 1
+ 182:	88 30       	cpi	r24, 0x08	; 8
+ 184:	91 05       	cpc	r25, r1
+ 186:	39 f7       	brne	.-50     	; 0x156 <glcdPixel+0x52>
+ 188:	80 e0       	ldi	r24, 0x00	; 0
+ 18a:	90 e0       	ldi	r25, 0x00	; 0
+ 18c:	60 e0       	ldi	r22, 0x00	; 0
+ 18e:	70 e0       	ldi	r23, 0x00	; 0
+ 190:	c1 e0       	ldi	r28, 0x01	; 1
+ 192:	d0 e0       	ldi	r29, 0x00	; 0
+ 194:	a9 01       	movw	r20, r18
+ 196:	08 2e       	mov	r0, r24
+ 198:	02 c0       	rjmp	.+4      	; 0x19e <glcdPixel+0x9a>
+ 19a:	55 95       	asr	r21
+ 19c:	47 95       	ror	r20
+ 19e:	0a 94       	dec	r0
+ 1a0:	e2 f7       	brpl	.-8      	; 0x19a <glcdPixel+0x96>
+ 1a2:	40 ff       	sbrs	r20, 0
+ 1a4:	09 c0       	rjmp	.+18     	; 0x1b8 <glcdPixel+0xb4>
+ 1a6:	ae 01       	movw	r20, r28
+ 1a8:	08 2e       	mov	r0, r24
+ 1aa:	02 c0       	rjmp	.+4      	; 0x1b0 <glcdPixel+0xac>
+ 1ac:	44 0f       	add	r20, r20
+ 1ae:	55 1f       	adc	r21, r21
+ 1b0:	0a 94       	dec	r0
+ 1b2:	e2 f7       	brpl	.-8      	; 0x1ac <glcdPixel+0xa8>
+ 1b4:	64 2b       	or	r22, r20
+ 1b6:	75 2b       	or	r23, r21
+ 1b8:	01 96       	adiw	r24, 0x01	; 1
+ 1ba:	84 30       	cpi	r24, 0x04	; 4
+ 1bc:	91 05       	cpc	r25, r1
+ 1be:	51 f7       	brne	.-44     	; 0x194 <glcdPixel+0x90>
+ 1c0:	82 e0       	ldi	r24, 0x02	; 2
+ 1c2:	82 b9       	out	0x02, r24	; 2
+ 1c4:	e8 b9       	out	0x08, r30	; 8
+ 1c6:	a8 b9       	out	0x08, r26	; 8
+ 1c8:	68 b9       	out	0x08, r22	; 8
+ 1ca:	88 b1       	in	r24, 0x08	; 8
+ 1cc:	12 b8       	out	0x02, r1	; 2
+ 1ce:	96 df       	rcall	.-212    	; 0xfc <glcdWrite>
+ 1d0:	df 91       	pop	r29
+ 1d2:	cf 91       	pop	r28
+ 1d4:	1f 91       	pop	r17
+ 1d6:	0f 91       	pop	r16
+ 1d8:	08 95       	ret
+
+000001da <_glcdDebugFill>:
+ 1da:	1f 93       	push	r17
+ 1dc:	cf 93       	push	r28
+ 1de:	df 93       	push	r29
+ 1e0:	10 e0       	ldi	r17, 0x00	; 0
+ 1e2:	0b c0       	rjmp	.+22     	; 0x1fa <_glcdDebugFill+0x20>
+ 1e4:	6c 2f       	mov	r22, r28
+ 1e6:	81 2f       	mov	r24, r17
+ 1e8:	8d df       	rcall	.-230    	; 0x104 <glcdPixel>
+ 1ea:	21 96       	adiw	r28, 0x01	; 1
+ 1ec:	c1 15       	cp	r28, r1
+ 1ee:	81 e0       	ldi	r24, 0x01	; 1
+ 1f0:	d8 07       	cpc	r29, r24
+ 1f2:	c1 f7       	brne	.-16     	; 0x1e4 <_glcdDebugFill+0xa>
+ 1f4:	1f 5f       	subi	r17, 0xFF	; 255
+ 1f6:	10 31       	cpi	r17, 0x10	; 16
+ 1f8:	19 f0       	breq	.+6      	; 0x200 <_glcdDebugFill+0x26>
+ 1fa:	c0 e0       	ldi	r28, 0x00	; 0
+ 1fc:	d0 e0       	ldi	r29, 0x00	; 0
+ 1fe:	f2 cf       	rjmp	.-28     	; 0x1e4 <_glcdDebugFill+0xa>
+ 200:	df 91       	pop	r29
+ 202:	cf 91       	pop	r28
+ 204:	1f 91       	pop	r17
+ 206:	08 95       	ret
+
+00000208 <main>:
+int main(void)
+{
+    /* Replace with your application code */
+    while (1) 
+    {
+		glcdInit();
+ 208:	6c df       	rcall	.-296    	; 0xe2 <glcdInit>
+		_glcdDebugFill();
+ 20a:	e7 df       	rcall	.-50     	; 0x1da <_glcdDebugFill>
+ 20c:	fd cf       	rjmp	.-6      	; 0x208 <main>
+
+0000020e <_exit>:
+ 20e:	f8 94       	cli
+
+00000210 <__stop_program>:
+ 210:	ff cf       	rjmp	.-2      	; 0x210 <__stop_program>
