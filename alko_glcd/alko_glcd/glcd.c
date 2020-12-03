@@ -26,7 +26,8 @@ void glcdInit(void)
 	
 	COMMAND = 0b00000010;
 	DIGITAL = 0b10101111; // Display : ON
-	DIGITAL = 0b01000000; // Start line : 0
+	//Start ln :01XXXXXX 
+	DIGITAL = 0b01000011;
 	ClearVars();
 }
 
@@ -46,7 +47,7 @@ int glcdRead(void)
 	COMMAND = 0;
 }
 
-void glcdWrite(void)
+void glcdWrite()
 {
 	COMMAND = 0b00000110;
 	COMMAND = 0;
