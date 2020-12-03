@@ -22,10 +22,10 @@ struct sysBools
 };
 char received[6] = {0};
 char receivedLast[6] = {0};
-char lcdisplay[64] = {0};
+char expression[64] = {0};
 
 
-char getButton(int x, int y)
+char button(int x, int y)
 {
 	if (bit_is_set(received[x], y))
 	{return true;}
@@ -65,7 +65,15 @@ int main(void)
 		/*
 			Processing basic commands (0-9, plus, minus, all that jazz)
 		*/
-			
+		for (int x = 2 ; x < 5; x++)
+		{
+			for (int y = 4; y < 8; y++) 
+			{
+			/*switch (y)
+				{
+				}
+			*/}
+		}
 		for (int i = 0; i > 6; i++)
 		{
 			receivedLast[i] = received[i];

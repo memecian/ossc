@@ -12,13 +12,12 @@ Discarded input sections
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
- .text.getButton
-                0x00000000       0x18 main.o
+ .text.button   0x00000000       0x18 main.o
  .text.uartReceiveC
                 0x00000000       0x10 main.o
  .text.uartReceiveS
                 0x00000000       0x28 main.o
- .bss.lcdisplay
+ .bss.expression
                 0x00000000       0x40 main.o
  .bss.receivedLast
                 0x00000000        0x6 main.o
@@ -441,11 +440,11 @@ END GROUP
  *(.debug_frame)
  .debug_frame   0x00000000       0x70 main.o
 
-.debug_str      0x00000000      0x506
+.debug_str      0x00000000      0x504
  *(.debug_str)
  .debug_str     0x00000000      0x366 C:/Absolut Alkoholische Anwendungen/Atmel Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega2561/avr6/crtatmega2561.o
- .debug_str     0x00000366      0x1a0 main.o
-                                0x1d9 (size before relaxing)
+ .debug_str     0x00000366      0x19e main.o
+                                0x1d7 (size before relaxing)
 
 .debug_loc      0x00000000       0x85
  *(.debug_loc)
