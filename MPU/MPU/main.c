@@ -15,15 +15,24 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
+// save memory by using a struct for booleans
 struct sysBools
 {
 	unsigned int shift : 1;
 	unsigned int alt : 1;
 };
+
 char received[6] = {0};
 char receivedLast[6] = {0};
 char expression[64] = {0};
 
+// FUNCTION DEFS
+
+void append(char* s, char c) {
+	int len = strlen(s);
+	s[len] = c;
+	s[len+1] = '\0';
+}
 
 char button(int x, int y)
 {
@@ -57,23 +66,42 @@ void uartReceiveS(char *buffer)
 	*buffer = '\0';					// Standard C string termination symbol
 }
 
+// -----------------------------------------------------------
+
 int main(void)
 {
 	uartInit();
 	while (1)
 	{	
-		/*
-			Processing basic commands (0-9, plus, minus, all that jazz)
-		*/
-		for (int x = 2 ; x < 5; x++)
-		{
-			for (int y = 4; y < 8; y++) 
-			{
-			/*switch (y)
-				{
-				}
-			*/}
-		}
+		
+		//Processing basic commands (0-9, plus, minus, all that jazz)
+		
+		if (button(2,4)) {append(expression, '7');}
+		if (button(3,4)) {append(expression, '8');}
+		if (button(5,4)) {append(expression, '7');}	
+		
+		
+		if (button(2,5)) {append(expression, '4');}
+		if (button(3,5)) {append(expression, '5');}
+		if (button(5,5)) {append(expression, '6');}
+		
+		
+		if (button(2,6)) {append(expression, '1');}
+		if (button(3,6)) {append(expression, '2');}
+		if (button(5,6)) {append(expression, '3');}	
+		
+		
+		if (button(2,7)) {append(expression, ',');}
+		if (button(3,7)) {append(expression, '0');}
+		if (button(5,7)) {append(expression, '-');}
+			
+		
+		if (button(4,0)) {append(expression, '+');}
+		if (button(5,0)) {append(expression, '-');}
+		if (button(4,1)) {append(expression, '*');}
+		if (button(5,1)) {append(expression, '/');}
+			
+			
 		for (int i = 0; i > 6; i++)
 		{
 			receivedLast[i] = received[i];
